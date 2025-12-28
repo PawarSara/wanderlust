@@ -26,3 +26,5 @@ build/
 # Temporary files
 .tmp
 .cache
+
+*.code-workspace

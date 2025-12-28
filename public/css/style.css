@@ -313,14 +313,17 @@ label {
   margin: 40px auto;
   padding: 30px;
   animation: fadeIn 0.6s ease-out;
-  background: linear-gradient(rgba(40, 20, 20, 0.55), rgba(40, 20, 20, 0.55)),
+  /* Subtle overlay to keep text readable */
+  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
     url("https://res.cloudinary.com/dukrzznc4/image/upload/v1765369548/photo-1744979937337-d2cbdcbb5b70_jxuqez.avif");
   background-size: cover;
   background-position: center 60%;
   background-repeat: no-repeat;
   border-radius: 20px;
   color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
+
 
 /* =======================================================
    HEADER (User welcome section)
