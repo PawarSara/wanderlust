@@ -1,0 +1,75 @@
+<% layout('layouts/boilerplate') %>
+
+<% 
+  // Ensure listing and features are defined
+  const currentListing = listing || {}; 
+  currentListing.features = currentListing.features || [];
+%>
+
+<body>
+  <div class="edit-container">
+    <h1 class="edit-title">Edit Listing</h1>
+
+    <% if (typeof error !== 'undefined') { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/listings/<%= currentListing._id %>?_method=PUT" 
+          enctype="multipart/form-data" class="edit-form">
+
+      <!-- Title -->
+      <label>Title:</label>
+      <input name="listing[title]" value="<%= currentListing.title || '' %>" required><br><br>
+
+      <!-- Description -->
+      <label>Description:</label>
+      <textarea name="listing[description]" required><%= currentListing.description || '' %></textarea><br><br>
+
+      <!-- Price -->
+      <label>Price:</label>
+      <input name="listing[price]" value="<%= currentListing.price || '' %>" type="number" required><br><br>
+
+      <!-- Current Image -->
+      <label>Current Image:</label><br>
+      <% if (currentListing.image && currentListing.image.url) { %>
+        <img src="<%= currentListing.image.url %>" width="200" style="border-radius:8px;"><br><br>
+      <% } %>
+
+      <!-- Upload New Image -->
+      <label>Upload New Image (optional):</label>
+      <input type="file" name="image"><br><br>
+
+      <!-- Country -->
+      <label>Country:</label>
+      <input name="listing[country]" value="<%= currentListing.country || '' %>" required><br><br>
+
+      <!-- Location -->
+      <label>Location:</label>
+      <input name="listing[location]" value="<%= currentListing.location || '' %>" required><br><br>
+
+      <!-- Features -->
+      <label>Features:</label><br>
+      <div class="row g-2">
+        <div class="col-6">
+          <input type="checkbox" name="listing[features][]" value="pool" <%= currentListing.features.includes('pool') ? 'checked' : '' %>> Pool<br>
+          <input type="checkbox" name="listing[features][]" value="beach" <%= currentListing.features.includes('beach') ? 'checked' : '' %>> Beachfront<br>
+          <input type="checkbox" name="listing[features][]" value="mountain" <%= currentListing.features.includes('mountain') ? 'checked' : '' %>> Mountain View<br>
+          <input type="checkbox" name="listing[features][]" value="fireplace" <%= currentListing.features.includes('fireplace') ? 'checked' : '' %>> Fireplace<br>
+          <input type="checkbox" name="listing[features][]" value="hottub" <%= currentListing.features.includes('hottub') ? 'checked' : '' %>> Hot Tub<br>
+        </div>
+        <div class="col-6">
+          <input type="checkbox" name="listing[features][]" value="pet" <%= currentListing.features.includes('pet') ? 'checked' : '' %>> Pet Friendly<br>
+          <input type="checkbox" name="listing[features][]" value="wifi" <%= currentListing.features.includes('wifi') ? 'checked' : '' %>> Wifi<br>
+          <input type="checkbox" name="listing[features][]" value="parking" <%= currentListing.features.includes('parking') ? 'checked' : '' %>> Parking<br>
+          <input type="checkbox" name="listing[features][]" value="ac" <%= currentListing.features.includes('ac') ? 'checked' : '' %>> Air Conditioning<br>
+          <input type="checkbox" name="listing[features][]" value="kitchen" <%= currentListing.features.includes('kitchen') ? 'checked' : '' %>> Kitchen<br>
+          <input type="checkbox" name="listing[features][]" value="lake" <%= currentListing.features.includes('lake') ? 'checked' : '' %>> Lakefront<br>
+          <input type="checkbox" name="listing[features][]" value="farm" <%= currentListing.features.includes('farm') ? 'checked' : '' %>> Farm Stay<br>
+        </div>
+      </div><br>
+
+      <!-- Submit -->
+      <button class="btn edit-btn btn-outline-dark">Save Changes</button>
+    </form>
+  </div>
+</body>

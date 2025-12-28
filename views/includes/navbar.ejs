@@ -1,0 +1,120 @@
+<nav class="navbar navbar-expand-md sticky-top border-bottom">
+  <div class="container-fluid">
+
+    <!-- BRAND -->
+    <a class="navbar-brand logo d-flex align-items-center" href="/listings">
+      <i class="fas fa-compass"></i>
+      <span class="brand-text ms-1">WanderLust</span>
+    </a>
+
+    <!-- MOBILE SEARCH -->
+    <div class="search-wrapper w-100 d-md-none mt-2 mb-2">
+      <form class="search-form w-100" action="/" method="GET">
+        <input class="form-control" type="search" name="search" placeholder="Search destinations" />
+        <button class="btn btn-search" type="submit">Search</button>
+      </form>
+    </div>
+
+    <!-- MOBILE GREETING -->
+    <% if (currUser) { %>
+      <div class="d-md-none w-100 text-center mb-2">
+        <span class="nav-link fw-semibold">
+          👋 Hi, <%= currUser.username %>
+        </span>
+      </div>
+    <% } %>
+
+    <!-- TOGGLER -->
+    <button class="navbar-toggler" type="button" 
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <!-- COLLAPSIBLE CONTENT -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+      <!-- LEFT LINKS -->
+      <ul class="navbar-nav me-auto mt-3 mt-md-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">Add New Listing</a>
+        </li>
+      </ul>
+
+      <!-- DESKTOP SEARCH -->
+      <div class="search-wrapper search-desktop d-none d-md-flex mx-auto">
+        <form class="search-form" action="/" method="GET">
+          <input class="form-control" type="search" name="search" placeholder="Search destinations" />
+          <button class="btn btn-search" type="submit">Search</button>
+        </form>
+      </div>
+
+      <!-- RIGHT USER SECTION -->
+      <ul class="navbar-nav ms-auto">
+
+        <% if (currUser) { %>
+
+        <!-- DESKTOP DASHBOARD BUTTON -->
+        <li class="nav-item d-none d-md-block">
+          <a class="nav-link" href="/dashboard">
+             Dashboard
+          </a>
+        </li>
+
+        <!-- MOBILE DASHBOARD -->
+        <li class="nav-item d-md-none">
+          <a class="nav-link" href="/dashboard"> Dashboard</a>
+        </li>
+
+        <!-- DESKTOP MESSAGES -->
+        <li class="nav-item d-none d-md-block position-relative">
+          <a class="nav-link" href="/chat/inbox">
+            <i class="fas fa-comments"></i>
+            <% if (typeof unreadTotal !== "undefined" && unreadTotal > 0) { %>
+              <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">
+                <%= unreadTotal %>
+              </span>
+            <% } %>
+          </a>
+        </li>
+
+        <!-- MOBILE MESSAGES -->
+        <li class="nav-item d-md-none">
+          <a class="nav-link" href="/chat/inbox">
+            <i class="fas fa-comments"></i> Messages
+          </a>
+        </li>
+
+        <!-- DESKTOP GREETING -->
+        <li class="nav-item d-none d-md-block">
+          <span class="nav-link">👋 Hi, <%= currUser.username %></span>
+        </li>
+
+        <!-- LOGOUT -->
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+
+        <% } else { %>
+
+        <!-- LOGIN / SIGNUP -->
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Signup</a>
+        </li>
+
+        <% } %>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>

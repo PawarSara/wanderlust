@@ -1,0 +1,233 @@
+<% layout('layouts/boilerplate') %>
+
+<body>
+  <div class="show-container">
+
+    <% 
+      const currentListing = listing || {}; 
+      const reviews = currentListing.reviews || []; 
+      const owner = currentListing.owner || {}; 
+      const geometry = currentListing.geometry || { coordinates: [78.9629, 20.5937] }; 
+      const features = currentListing.features || [];
+
+      const myBooking = typeof myBookingForThisListing !== "undefined" ? myBookingForThisListing : null;
+    %>
+
+    <h1 class="show-title">About This Stay</h1>
+
+    <!-- MAIN DETAILS CARD -->
+    <div class="details-card">
+
+      <!-- Property Name -->
+      <div class="detail-row">
+        <span class="label">Property Name:</span>
+        <span><%= currentListing.title || "N/A" %></span>
+      </div>
+
+      <!-- Host -->
+      <div class="detail-row">
+        <span class="label">Hosted By:</span>
+        <span><%= owner.username || "Unknown" %></span>
+      </div>
+
+      <!-- Main Image -->
+      <div class="detail-row full-width-image">
+        <span class="label">Property Photo:</span><br><br>
+        <img 
+          src="<%= currentListing.image && currentListing.image.url ? currentListing.image.url : '/default.jpg' %>"
+          alt="listing image"
+          class="details-main-image"
+        />
+      </div>
+
+      <!-- Description -->
+      <div class="detail-row">
+        <span class="label">About This Place:</span>
+        <span><%= currentListing.description || "No description" %></span>
+      </div>
+
+      <!-- Price -->
+      <div class="detail-row">
+        <span class="label">Price Per Night:</span>
+        <span>&#8377;<%= currentListing.price ? currentListing.price.toLocaleString("en-IN") : "N/A" %> / night</span>
+      </div>
+        <br>
+        
+      <!-- ===================================================== -->
+      <!--                CHAT BUTTON SECTION                    -->
+      <!-- ===================================================== -->
+      <div class="mb-3">
+
+        <!-- ⭐ INQUIRY CHAT -->
+        <% if (existingChat) { %>
+
+          <!-- Chat Already Exists -->
+          <a href="/chat/thread/<%= existingChat._id %>" 
+             class="btn btn-dark mb-2">
+            💬 Open Chat with Host
+          </a>
+
+        <% } else { %>
+
+          <!-- No chat yet → create one -->
+          <a href="/chat/<%= currentListing._id %>" 
+             class="btn btn-outline-dark mb-2">
+            💬 Ask Host a Question
+          </a>
+
+        <% } %>
+
+
+        
+
+      <!-- BOOKING BOX -->
+      <div class="booking-box mt-3">
+        <h3 class="label">Start Your Wanderlust Journey✨</h3><br>
+        <form action="/bookings/<%= currentListing._id %>/book" method="POST">
+
+          <div class="mb-2">
+            <label>Check-In:</label>
+            <input type="date" name="checkIn" required>
+          </div>
+
+          <div class="mb-2">
+            <label>Check-Out:</label>
+            <input type="date" name="checkOut" required>
+          </div>
+
+          <div class="mb-2">
+            <label>Guests:</label>
+            <input type="number" name="guests" min="1" value="1" required>
+          </div>
+
+          <button class="btn btn-primary booking-btn">Request Booking</button>
+        </form>
+      </div>
+      <!-- END BOOKING BOX -->
+
+      <!-- Location -->
+      <div class="detail-row">
+        <span class="label">Located In:</span>
+        <span><%= currentListing.location || "N/A" %></span>
+      </div>
+
+      <!-- Country -->
+      <div class="detail-row">
+        <span class="label">Country:</span>
+        <span><%= currentListing.country || "N/A" %></span>
+      </div>
+
+      <!-- Features -->
+      <div class="detail-row">
+        <span class="label">Amenities Included:</span>
+        <% if (features.length > 0) { %>
+          <span><%= features.join(", ") %></span>
+        <% } else { %>
+          <span>None</span>
+        <% } %>
+      </div>
+
+    </div>
+    <!-- END DETAILS CARD -->
+
+
+    <!-- MAP -->
+    <h3 class="map-heading">Where You'll Be Staying:-</h3>
+    <div id="map" style="height: 200px; margin-bottom: 20px;"></div>
+
+
+    <!-- OWNER ACTIONS -->
+    <% if (currUser && owner._id && currUser._id.toString() === owner._id.toString()) { %>
+      <div class="actions mb-3">
+        <a href="/listings/<%= currentListing._id %>/edit" class="btn edit-btn btn-outline-dark">Edit</a>
+
+        <form method="POST" action="/listings/<%= currentListing._id %>?_method=DELETE">
+          <button class="btn delete-btn btn-outline-dark">Delete</button>
+        </form>
+      </div>
+    <% } %>
+
+    <hr>
+
+
+    <!-- ======================== -->
+    <!--         REVIEWS          -->
+    <!-- ======================== -->
+     <br>
+
+    <div class="row">
+      <div class="col-6 mx-auto review-form-wrapper">
+
+        <div class="main-experience"><h4 class="experience">Share Your Experience✨</h4></div>
+
+        <form method="POST" action="/listings/<%= currentListing._id %>/reviews">
+
+          <div class="mb-3">
+            <label class="form-label">Your Name</label>
+            <input type="text" name="review[name]" class="form-control" required>
+          </div>
+
+          <!-- Star Rating -->
+          <div class="mb-3">
+            <label class="form-label">Rating</label>
+            <div class="star-rating">
+              <input type="radio" name="review[rating]" value="5" id="star5"><label for="star5">★</label>
+              <input type="radio" name="review[rating]" value="4" id="star4"><label for="star4">★</label>
+              <input type="radio" name="review[rating]" value="3" id="star3" checked><label for="star3">★</label>
+              <input type="radio" name="review[rating]" value="2" id="star2"><label for="star2">★</label>
+              <input type="radio" name="review[rating]" value="1" id="star1"><label for="star1">★</label>
+            </div>
+          </div>
+
+          <!-- Comment -->
+          <div class="mb-3">
+            <label class="form-label">Experience</label>
+            <textarea name="review[comment]" class="form-control" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-outline-dark">Submit</button>
+
+        </form>
+
+        <hr/>
+        <br>
+        <div class="guest-heading"><h4 class="mb-3">What Guests Are Saying:-</h4></div>
+
+        <div class="review-section">
+          <% reviews.forEach(review => { %>
+            <div class="card shadow-sm mb-3 review-card">
+              <div class="card-body">
+
+                <h6 class="card-title"><strong><%= review.name || "Anonymous" %></strong></h6>
+                <h6 class="card-subtitle mb-2 text-muted">⭐ <%= review.rating || 0 %> / 5</h6>
+                <p class="card-text"><%= review.comment || "" %></p>
+
+                <% if (currUser && review.author && review.author._id.toString() === currUser._id.toString()) { %>
+                  <form method="POST" action="/listings/<%= currentListing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                    <button class="btn btn-sm btn-dark">Delete</button>
+                  </form>
+                <% } %>
+
+              </div>
+            </div>
+          <% }) %>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LEAFLET MAP SCRIPTS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const listingData = JSON.parse('<%- JSON.stringify(currentListing) %>');
+    const lat = listingData.geometry.coordinates[1];
+    const lng = listingData.geometry.coordinates[0];
+  </script>
+
+  <script src="/css/js/showMap.js"></script>
+
+</body>

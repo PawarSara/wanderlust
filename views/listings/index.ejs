@@ -1,0 +1,140 @@
+<% layout('layouts/boilerplate') %>
+
+<!-- ===================== INFO CARDS (FULL WIDTH) ===================== -->
+<div class="info-row-wrapper">
+  <div class="info-row">
+
+      <!-- 1. List Your Property -->
+      <div class="info-card card-1">
+          <i class="fa-solid fa-circle-plus"></i>
+          <h3 class="info-title">List Your Property</h3>
+          <p>
+              Add your stay with beautiful images, pricing, and features.  
+              All tools are simple, fast, and beginner-friendly.
+          </p>
+      </div>
+
+      <!-- 2. Discover Amazing Stays -->
+      <div class="info-card card-2">
+          <i class="fa-solid fa-house-chimney"></i>
+          <h3 class="info-title">Discover Amazing Stays</h3>
+          <p>
+              Explore verified stays with clear photos, premium UI,  
+              filters, favorites, and transparent pricing.
+          </p>
+      </div>
+
+      <!-- 3. Smart Search & Reviews -->
+      <div class="info-card card-3">
+          <i class="fa-solid fa-magnifying-glass-location"></i>
+          <h3 class="info-title">Smart Search & Reviews</h3>
+          <p>
+              Search instantly, read real reviews, check ratings,  
+              and make confident booking decisions.
+          </p>
+      </div>
+
+  </div>
+</div>
+
+
+
+<!-- ===================== FILTER BAR ===================== -->
+<div class="filter-bar my-3 py-2 border-bottom">
+
+  <% const filters = [
+    { key: "pool", label: "Amazing Pools", icon: "fa-person-swimming" },
+    { key: "beach", label: "Beachfront", icon: "fa-umbrella-beach" },
+    { key: "mountain", label: "Mountain View", icon: "fa-mountain" },
+    { key: "fireplace", label: "Fireplace", icon: "fa-fire" },
+    { key: "hottub", label: "Hot Tub", icon: "fa-hot-tub-person" },
+    { key: "pet", label: "Pet Friendly", icon: "fa-paw" },
+    { key: "wifi", label: "Wi-Fi", icon: "fa-wifi" },
+    { key: "parking", label: "Parking", icon: "fa-square-parking" },
+    { key: "ac", label: "Air Conditioning", icon: "fa-snowflake" },
+    { key: "kitchen", label: "Kitchen", icon: "fa-kitchen-set" },
+    { key: "lake", label: "Lakefront", icon: "fa-water" },
+    { key: "farm", label: "Farm Stay", icon: "fa-tractor" }
+  ]; %>
+
+  <% filters.forEach(f => { %>
+    <a href="/listings?filter=<%= f.key %>" 
+       class="filter-item <%= filter === f.key ? 'filter-selected' : '' %>">
+       
+       <i class="fa-solid <%= f.icon %> filter-icon"></i>
+       <div class="filter-label"><%= f.label %></div>
+
+    </a>
+  <% }) %>
+
+  <% if (search) { %>
+    <p>Showing results for "<%= search %>"</p>
+  <% } %>
+
+</div>
+
+<br>
+
+<!-- ===================== LISTINGS GRID ===================== -->
+
+<!-- ⭐ OUTER WRAPPER added to make the background full-width -->
+<div class="listing-wrapper-outer">
+
+  <div class="listing-wrapper row row-cols-lg-3 row-cols-md-2 row-cols-1 g-3">
+
+    <% for (let listing of allListings) { %>
+
+      <div class="col">
+
+        <div class="card listing-card position-relative">
+
+          <!-- ❤️ WISHLIST BUTTON -->
+          <form 
+            action="/favorites/<%= listing._id %>" 
+            method="POST" 
+            class="wishlist-form-card"
+          >
+            <% 
+              const favs = currUser?.favorites?.map(f => f.toString()) || [];
+              const isFav = favs.includes(listing._id.toString());
+            %>
+
+            <button class="wishlist-btn-card" type="submit">
+              <% if (isFav) { %>
+                <i class="fa-solid fa-heart saved-heart"></i>
+              <% } else { %>
+                <i class="fa-regular fa-heart unsaved-heart"></i>
+              <% } %>
+            </button>
+          </form>
+          <!-- END WISHLIST -->
+
+          <!-- CLICKABLE CARD CONTENT -->
+          <a href="/listings/<%= listing._id %>" class="listinglink" style="text-decoration:none;">
+
+            <img 
+              src="<%= listing.image?.url || listing.image || '/images/default.jpg' %>" 
+              class="card-img-top"
+              alt="listing_image"
+            >
+
+            <div class="card-body">
+              <p class="card-text listingcard-text">
+                <strong><%= listing.title %></strong><br>
+                ₹<%= listing.price.toLocaleString("en-IN") %>/night
+              </p>
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    <% } %>
+
+  </div>
+
+</div>
+<!-- END OUTER WRAPPER -->
+

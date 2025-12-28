@@ -1,0 +1,207 @@
+<% layout('layouts/boilerplate') %>
+
+<%
+  function format(date) {
+    return new Date(date).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+  }
+%>
+
+<div class="dashboard-container">
+
+  <!-- USER HEADER CARD -->
+  <div class="dashboard-header-card">
+
+    <div class="header-top">
+      <h1 class="dashboard-title">Welcome, <%= user.username %> 👋</h1>
+    </div>
+
+    <p class="dashboard-subtitle">
+      Logged in as <strong><%= user.email %></strong>
+    </p>
+
+  </div>
+
+
+
+  <!-- YOUR SAVED LISTINGS -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Your Saved Stays ❤️</h2>
+
+      <% if (!favorites.length) { %>
+        <p class="muted-text">You haven't saved any stays yet.</p>
+      <% } %>
+    </div>
+
+    <div class="dashboard-grid">
+      <% favorites.forEach(listing => { %>
+        <div class="dashboard-card">
+          <a href="/listings/<%= listing._id %>" class="listinglink">
+            <img src="<%= listing.image?.url || '/images/default.jpg' %>" />
+
+            <div class="card-body">
+              <p class="listingcard-text">
+                <strong><%= listing.title %></strong><br>
+                ₹<%= listing.price.toLocaleString("en-IN") %>/night
+              </p>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+
+
+  <!-- YOUR LISTINGS -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Your Listings 🏠</h2>
+
+      <% if (!myListings.length) { %>
+        <p class="muted-text">You haven't listed any properties yet.</p>
+      <% } %>
+    </div>
+
+    <div class="dashboard-grid">
+      <% myListings.forEach(listing => { %>
+
+        <div class="dashboard-card">
+          <a href="/listings/<%= listing._id %>" class="listinglink">
+
+            <img src="<%= listing.image?.url || '/images/default.jpg' %>" />
+
+            <div class="card-body">
+              <p class="listingcard-text">
+                <strong><%= listing.title %></strong><br>
+                ₹<%= listing.price.toLocaleString("en-IN") %>/night
+              </p>
+
+              <div class="host-metrics">
+                <span>👀 <%= listing.views || 0 %> views</span>
+                <span>❤️ <%= listing.savesCount || 0 %> saves</span>
+                <span>⭐ <%= listing.avgRating || 0 %> / 5</span>
+              </div>
+            </div>
+
+          </a>
+        </div>
+
+      <% }) %>
+    </div>
+  </section>
+
+
+
+  <!-- HOST BOOKING REQUESTS -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Booking Requests 📩</h2>
+
+      <% if (!hostBookings.length) { %>
+        <p class="muted-text">No booking requests yet.</p>
+      <% } %>
+    </div>
+
+    <div class="booking-grid">
+      <% hostBookings.forEach(b => { %>
+
+        <div class="booking-card">
+
+          <% if (b.listing) { %>
+            <img src="<%= b.listing.image?.url || '/images/default.jpg' %>" class="booking-img">
+          <% } else { %>
+            <img src="/images/default.jpg" class="booking-img">
+          <% } %>
+
+          <div class="booking-info">
+
+            <h3><%= b.listing ? b.listing.title : "Listing Removed" %></h3>
+
+            <p>
+              👤 Guest: <strong><%= b.guest.username %></strong><br>
+
+              <% if (b.listing) { %>
+                📅 <%= format(b.checkIn) %> → <%= format(b.checkOut) %><br>
+                👥 Guests: <%= b.guests %><br>
+                💰 Total: ₹<%= b.totalPrice %>
+              <% } else { %>
+                Listing no longer exists.
+              <% } %>
+            </p>
+
+            <span class="status-badge <%= b.status.toLowerCase() %>">
+              <%= b.status %>
+            </span>
+
+            <% if (b.status === "pending" && b.listing) { %>
+              <form method="POST" action="/bookings/<%= b._id %>/accept">
+                <button class="btn-accept">Accept</button>
+              </form>
+
+              <form method="POST" action="/bookings/<%= b._id %>/reject">
+                <button class="btn-reject">Reject</button>
+              </form>
+            <% } %>
+          </div>
+
+        </div>
+
+      <% }) %>
+    </div>
+  </section>
+
+
+
+  <!-- USER TRIPS -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Your Trips ✈️</h2>
+
+      <% if (!myTrips.length) { %>
+        <p class="muted-text">You haven't booked any stays yet.</p>
+      <% } %>
+    </div>
+
+    <div class="booking-grid">
+      <% myTrips.forEach(t => { %>
+
+        <div class="booking-card">
+
+          <% if (t.listing) { %>
+            <img src="<%= t.listing.image?.url || '/images/default.jpg' %>" class="booking-img">
+          <% } else { %>
+            <img src="/images/default.jpg" class="booking-img">
+          <% } %>
+
+          <div class="booking-info">
+            <h3><%= t.listing ? t.listing.title : "Listing Removed" %></h3>
+
+            <p>
+              <% if (t.listing) { %>
+                🏡 Host: <strong><%= t.host.username %></strong><br>
+                📅 <%= format(t.checkIn) %> → <%= format(t.checkOut) %><br>
+                👥 Guests: <%= t.guests %><br>
+                💰 Total: ₹<%= t.totalPrice %>
+              <% } else { %>
+                This stay is no longer available.
+              <% } %>
+            </p>
+
+            <span class="status-badge <%= t.status.toLowerCase() %>">
+              <%= t.status %>
+            </span>
+
+          </div>
+
+        </div>
+
+      <% }) %>
+    </div>
+  </section>
+
+</div>

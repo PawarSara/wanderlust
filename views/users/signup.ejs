@@ -1,0 +1,123 @@
+<% var authPage = true; %>
+<% layout("/layouts/boilerplate") %>
+
+
+<div class="signup-wrapper">
+  <div class="signup-container">
+
+    <h2 class="signup-title text-center mb-4">Sign Up on Wanderlust</h2>
+
+    <form action="/signup" method="POST" class="needs-validation" novalidate id="signupForm">
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          name="username"
+          id="username"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">
+          Please enter a username.
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          name="email"
+          id="email"
+          type="email"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">
+          Please enter a valid email.
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback" id="passwordError">
+          Password must be at least 8 characters, include uppercase, number,
+          and special character.
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input
+          name="confirmPassword"
+          id="confirmPassword"
+          type="password"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback" id="confirmPasswordError">
+          Passwords do not match.
+        </div>
+      </div>
+
+      <button type="submit" class="signup-btn">Sign Up</button>
+
+    </form>
+  </div>
+</div>
+
+<script>
+  (() => {
+    'use strict';
+    const form = document.getElementById('signupForm');
+
+    form.addEventListener('submit', function(event) {
+      let valid = true;
+
+      // Bootstrap validation
+      if (!form.checkValidity()) {
+        valid = false;
+      }
+
+      // Password validation
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      const passwordPattern =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+
+      if (!passwordPattern.test(password)) {
+        document.getElementById('password').classList.add('is-invalid');
+        valid = false;
+      } else {
+        document.getElementById('password').classList.remove('is-invalid');
+      }
+
+      if (password !== confirmPassword) {
+        document.getElementById('confirmPassword').classList.add('is-invalid');
+        valid = false;
+      } else {
+        document
+          .getElementById('confirmPassword')
+          .classList.remove('is-invalid');
+      }
+
+      if (!valid) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      form.classList.add('was-validated');
+    }, false);
+  })();
+</script>

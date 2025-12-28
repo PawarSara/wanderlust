@@ -1,0 +1,76 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="inbox-page">   <!-- ⭐ Required wrapper added -->
+
+    <div class="inbox-container">
+
+        <h2 class="inbox-heading">Your Messages 💬</h2><br>
+
+        <% if (!chats || chats.length === 0) { %>
+            <p class="muted">No conversations yet.</p>
+        <% } else { %>
+
+            <div class="inbox-list">
+
+                <% chats.forEach(chat => { %>
+                    
+                    <a href="/chat/thread/<%= chat._id %>" class="inbox-item">
+
+                        <!-- Listing image or fallback -->
+                        <img 
+                            class="inbox-img"
+                            src="<%= chat.listing && chat.listing.image ? chat.listing.image.url : '/images/default.jpg' %>"
+                        />
+
+                        <div class="inbox-content">
+
+                            <!-- Title -->
+                            <h5 class="inbox-title">
+                                <%= chat.listing ? chat.listing.title : "Listing Removed" %>
+                            </h5>
+
+                            <!-- Who you're talking with -->
+                            <p class="inbox-sub">
+                                Talking with 
+                                <strong>
+                                    <%= chat.host._id.toString() === currentUserId.toString()
+                                        ? chat.guest.username
+                                        : chat.host.username %>
+                                </strong>
+                            </p>
+
+                            <!-- Last message preview -->
+                            <% const last = chat.messages[chat.messages.length - 1]; %>
+                            <p class="inbox-preview">
+                                <% if (last) { %>
+                                    <%= last.text.substring(0, 40) %>...
+                                <% } else { %>
+                                    No messages yet.
+                                <% } %>
+                            </p>
+
+                        </div>
+
+                        <!-- Unread Badge -->
+                        <% 
+                            let unreadCount = 
+                                chat.host._id.toString() === currentUserId.toString() 
+                                    ? chat.unreadForHost 
+                                    : chat.unreadForGuest;
+                        %>
+
+                        <% if (unreadCount > 0) { %>
+                            <span class="unread-badge"><%= unreadCount %></span>
+                        <% } %>
+
+                    </a>
+
+                <% }) %>
+
+            </div>
+
+        <% } %>
+
+    </div> <!-- /.inbox-container -->
+
+</div> <!-- /.inbox-page -->

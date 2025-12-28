@@ -1,0 +1,3787 @@
+/* ===================== Premium Theme Variables ===================== */
+
+:root{
+  --bg: rgb(79, 49, 49);
+  --text: #333;
+  --primary: rgb(79, 49, 49);
+  --accent: #f39c12;
+  --muted: #cfcfcf;
+  --card-bg: #fff;
+  --form-focus: rgba(178,77,77,0.18);
+  --success: #28a745;
+  --danger: #d9534f;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-sm: 0 3px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+  --shadow-strong: 0 12px 40px rgba(0,0,0,0.14);
+
+  --gap-xs: 8px;
+  --gap-sm: 12px;
+  --gap-md: 20px;
+  --gap-lg: 28px;
+
+  --max-width: 10000px!important;
+}
+
+/* ===================== Base / Reset ===================== */
+* { box-sizing: border-box; }
+html,body { height:100%; }
+/* ===================== GLOBAL BACKGROUND IMAGE ===================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  background:  rgb(79, 49, 49)!important ;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  
+  /* soft ombre tint in your theme shade */
+  /* background: linear-gradient(
+    rgba(50,49,49,0.6) 0%,
+    rgba(50,49,49,0.65) 40%,
+    rgba(50,49,49,0.75) 100%
+  ); */
+  backdrop-filter: blur(2px);
+  z-index: -1;       /* stays behind all content */
+  pointer-events: none;
+}
+
+
+/* page wrapper */
+.container {
+  width: 95%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--gap-md);
+  padding-right: var(--gap-md);
+}
+
+/* keep main comfortable */
+main {
+  padding: 2rem 0;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ===================== Buttons ===================== */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding: .55rem .85rem;
+  border-radius: 8px;
+  cursor:pointer;
+  border: none;
+  font-weight:700;
+  transition: transform .12s ease, box-shadow .12s ease;
+  text-decoration:none;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--primary), rgba(79,49,49,0.95));
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(79,49,49,0.12);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--muted);
+  color: var(--text);
+}
+.btn-ghost:hover { background: rgba(0,0,0,0.03); }
+
+.icon-btn { padding:8px; border-radius:8px; }
+
+/* ===================== Cards ===================== */
+
+
+.card img {
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  display:block;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.card-body {
+  padding: 18px;
+  text-align: left;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.card-text {
+  color: rgba(0,0,0,0.65);
+  font-size: .98rem;
+  margin:0;
+}
+
+.card-meta {
+  margin-top:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.price {
+  font-size:1.4rem;
+  font-weight:800;
+  color: var(--primary);
+}
+
+/* ===================== Forms ===================== */
+.form-container, .edit-container {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.form-container h1, .edit-title {
+  margin:0 0 12px 0;
+  color:var(--primary);
+  font-weight:800;
+}
+
+/* inputs */
+input[type="text"], input[type="email"], input[type="number"],
+textarea, select {
+  width:100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--muted);
+  background: #fff;
+  transition: box-shadow .18s ease, border-color .18s ease;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 6px 18px var(--form-focus);
+}
+
+/* label */
+label {
+  display:block;
+  margin-bottom:6px;
+  font-weight:700;
+  color:#444;
+  font-size:.95rem;
+}
+
+/* form button */
+.submit-btn {
+  width: 100%;
+  max-width: 260px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg,var(--primary), rgba(79,49,49,0.9));
+  color: #fff;
+  font-weight:800;
+  border:none;
+  cursor:pointer;
+}
+
+.submit-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+/* align on desktop */
+@media(min-width:720px){
+  .form-actions { justify-content:flex-end; }
+}
+
+/* ===================== Review Cards ===================== */
+.review-section .card {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 12px;
+}
+.review-section .card-body {
+  padding:12px;
+}
+
+/* ===================== Flash Messages ===================== */
+.flash {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn .38s ease;
+  flex-wrap: wrap;      
+  margin-top: 12px;       /* NEW: allows content to wrap on small screens */
+}
+
+/* Colors (unchanged) */
+.flash-success {
+  background: var(--success);
+  border-left:6px solid rgba(211,177,139,0.95);
+  color: #fff;
+}
+
+.flash-error {
+  background: var(--danger);
+  border-left:6px solid rgba(241,166,166,0.95);
+  color:#fff;
+}
+
+/* Close button (unchanged) */
+.flash-close {
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* ===========================
+    RESPONSIVENESS ADDED
+=========================== */
+@media (max-width: 576px) {
+  .flash {
+    flex-direction: column;      /* NEW: stack message + close button */
+    align-items: flex-start;     /* NEW: aligns text to left */
+    gap: 8px;                    /* smaller spacing */
+    padding: 12px; 
+    margin-top: 16px;             /* tighter layout */
+  }
+
+  .flash-close {
+    align-self: flex-end;        /* NEW: keeps close button on right side */
+    font-size: 16px;             /* slightly smaller button */
+  }
+}
+
+@media (max-width: 350px) {
+  .flash {
+    font-size: 14px;             /* fit extra small devices */
+  }
+
+  .flash-close {
+    font-size: 15px;
+  }
+}
+
+/* ===================== Star Rating ===================== */
+.star-rating { direction: rtl; display:inline-flex; font-size:1.6rem; gap:6px; }
+.star-rating input[type="radio"]{ display:none; }
+.star-rating label {
+  color: #d0d0d0;
+  cursor:pointer;
+  transition: color .12s ease;
+}
+.star-rating input[type="radio"]:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: gold;
+}
+/* =======================================================
+   DASHBOARD CONTAINER
+======================================================= */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  animation: fadeIn 0.6s ease-out;
+  background: linear-gradient(rgba(40, 20, 20, 0.55), rgba(40, 20, 20, 0.55)),
+    url("https://res.cloudinary.com/dukrzznc4/image/upload/v1765369548/photo-1744979937337-d2cbdcbb5b70_jxuqez.avif");
+  background-size: cover;
+  background-position: center 60%;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  color: #fff;
+}
+
+/* =======================================================
+   HEADER (User welcome section)
+======================================================= */
+.dashboard-header-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0.15)
+  );
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-radius: 22px;
+  padding: 38px 46px;
+  margin: 0 auto 45px auto;
+  max-width: 900px;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.22),
+    0 15px 32px rgba(0, 0, 0, 0.18),
+    inset 0 2px 6px rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  animation: fadeSlideIn 0.7s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-header-card h2,
+.dashboard-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #f8f3ef;
+  letter-spacing: 0.5px;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 6px;
+}
+
+.dashboard-header-card .subtext,
+.dashboard-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* =======================================================
+   SECTION TITLES
+======================================================= */
+.dashboard-section {
+  margin: 18px 0 32px 0;
+}
+
+.dashboard-section-header h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff4c2;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+  margin-bottom: 8px;
+}
+
+.muted-text {
+  display: flex;
+  justify-content: center;
+  font-size: 1.1rem;
+  opacity: 0.7;
+  margin-bottom: 14px;
+  color: rgb(244, 241, 241);
+}
+
+/* =======================================================
+   LISTING CARDS (for listings / saved stays)
+======================================================= */
+.listing-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.18),
+    0 12px 20px rgba(0, 0, 0, 0.14),
+    0 25px 40px rgba(0, 0, 0, 0.12);
+}
+
+.listing-card:hover {
+  transform: perspective(900px) rotateX(4deg) rotateY(-4deg)
+    translateY(-8px) scale(1.03);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.25),
+    0 16px 32px rgba(0, 0, 0, 0.2),
+    0 35px 60px rgba(0, 0, 0, 0.18);
+}
+
+.listing-card img {
+  height: 210px;
+  width: 100%;
+  object-fit: cover;
+  transform: translateZ(18px);
+  transition: transform 0.35s ease;
+}
+
+.listing-card:hover img {
+  transform: translateZ(28px) scale(1.03);
+}
+
+.listingcard-text {
+  color: white;
+  transform: translateZ(15px);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  font-size: 1.2rem;
+}
+
+.listingcard-text strong {
+  color: bisque;
+}
+
+/* =======================================================
+   WISHLIST HEART
+======================================================= */
+.wishlist-form-card {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+}
+
+.wishlist-btn-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 8px 10px;
+  font-size: 1.3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.wishlist-btn-card:hover {
+  transform: scale(1.2);
+}
+
+.saved-heart {
+  color: #ff2a4d;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.unsaved-heart {
+  color: white;
+  opacity: 0.8;
+}
+
+/* =====================================================
+   DASHBOARD GRID – for Saved Stays & Your Listings
+===================================================== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; /* ✅ tight spacing between cards */
+  margin-top: 10px;
+}
+
+/* Desktop / large screens handled above */
+
+/* Tablet – 2 per row */
+@media (max-width: 991.98px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Mobile – 2 per row (tight grid) */
+@media (max-width: 575.98px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+/* Extra small phones – 1 per row */
+@media (max-width: 400px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* =====================================================
+   HOST METRICS (Views / Saves / Rating)
+===================================================== */
+.host-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+
+.host-metrics span {
+  padding: 5px 10px;
+  font-size: 1.12rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+  white-space: nowrap;
+  backdrop-filter: blur(3px);
+  transition: 0.25s ease-in-out;
+}
+
+.host-metrics span:hover {
+  background: rgba(79, 49, 49, 0.28);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 992px) {
+  .host-metrics span {
+    font-size: 0.78rem;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .host-metrics span {
+    font-size: 0.7rem;
+    padding: 3px 7px;
+  }
+}
+
+@media (max-width: 400px) {
+  .host-metrics span {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
+}
+
+/* =====================================================
+   CARD STYLING – DASHBOARD CARDS (Saved & Listings)
+===================================================== */
+.dashboard-card {
+  position: relative;
+  border: 2px solid black !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.25),
+    0 8px 20px rgba(0, 0, 0, 0.2) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dashboard-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  border: 1.5px solid rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.dashboard-card a {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block;
+}
+
+.dashboard-card img {
+  width: 100% !important;
+  height: 120px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+.dashboard-card .card-body {
+  padding: 8px 10px;
+  flex-grow: 1;
+}
+
+.dashboard-card .listingcard-text,
+.dashboard-card .listingcard-text strong {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1;
+  font-weight: 500;
+  color:   black !important;
+}
+
+/* =====================================================
+   BOOKING GRID – Booking Requests & Your Trips
+===================================================== */
+.booking-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;                 /* Controls spacing between cards */
+  justify-items: center !important;
+  align-items: start !important;
+  margin-top: 5px !important;
+}
+
+/* =====================================================
+   BOOKING CARD
+===================================================== */
+.booking-card {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px) saturate(140%);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 2px solid black;
+  margin: 0;
+}
+
+.booking-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+}
+
+.booking-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.booking-info h3 {
+  margin-bottom: 4px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: rgb(79, 49, 49);
+}
+
+.booking-info p {
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.status-badge.pending {
+  background: #ffe7a3;
+  color: #a07200;
+}
+
+.status-badge.accepted {
+  background: #d3ffd6;
+  color: #0b8c1a;
+}
+
+.status-badge.rejected {
+  background: #ffd3d3;
+  color: #a40000;
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+.btn-accept,
+.btn-reject {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.btn-accept {
+  background: rgb(79, 49, 49);
+  color: white;
+}
+
+.btn-accept:hover {
+  background: rgb(60, 35, 35);
+}
+
+.btn-reject {
+  background: #c73434;
+  color: white;
+}
+
+.btn-reject:hover {
+  background: #a92727;
+}
+
+/* =====================================================
+   RESPONSIVE – BOOKING CARDS
+===================================================== */
+@media (max-width: 576px) {
+  .booking-card {
+    max-width: 90%;
+    padding: 14px;
+  }
+
+  .booking-info h3 {
+    font-size: 1.25rem;
+  }
+
+  .booking-img {
+    height: 140px;
+  }
+}
+
+/* =======================================================
+   RESPONSIVE FIXES — DASHBOARD (CONTAINER & GRID)
+======================================================= */
+@media (max-width: 992px) {
+  .dashboard-container {
+    padding: 20px;
+    margin: 20px auto;
+    background-position: center 70%;
+  }
+
+  .dashboard-header-card {
+    padding: 28px 32px;
+    max-width: 700px;
+  }
+
+  .dashboard-header-card h2,
+  .dashboard-title {
+    font-size: 1.9rem;
+  }
+
+  .dashboard-section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .listing-card img {
+    height: 170px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    border-radius: 14px;
+    padding: 18px;
+    background-position: center 75%;
+  }
+
+  .dashboard-header-card {
+    padding: 24px 26px;
+    max-width: 90%;
+  }
+
+  .dashboard-header-card h2,
+  .dashboard-title {
+    font-size: 1.6rem;
+  }
+
+  .dashboard-section {
+    margin-bottom: 28px;
+  }
+
+  .listing-card img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-container {
+    padding: 15px;
+    margin-top: 15px;
+    background-size: cover;
+    background-position: center 80%;
+  }
+
+  .dashboard-header-card {
+    padding: 20px 18px;
+    max-width: 100%;
+  }
+
+  .dashboard-header-card h2,
+  .dashboard-title {
+    font-size: 1.35rem;
+  }
+
+  .dashboard-header-card .subtext,
+  .dashboard-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .dashboard-section-header h2 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+
+  .muted-text {
+    font-size: 1rem;
+  }
+
+  .listing-card img {
+    height: 130px;
+  }
+
+  .listingcard-text {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .dashboard-container {
+    padding: 12px;
+  }
+
+  .listing-card img {
+    height: 140px;
+  }
+}
+
+/* =======================================================
+   RESPONSIVE – SMALLER DASHBOARD CARDS (EXTRA TUNING)
+======================================================= */
+@media (max-width: 992px) {
+  .listingcard-text {
+    font-size: 1.05rem !important;
+    padding: 4px 8px !important;
+  }
+
+  .dashboard-card {
+    transform: scale(0.97);
+  }
+}
+
+@media (max-width: 576px) {
+  .listing-card {
+    border-radius: 12px !important;
+    transform: scale(0.92);
+  }
+
+  .listingcard-text {
+    font-size: 1.2rem !important;
+    padding: 4px 6px !important;
+  }
+}
+@media (max-width: 680px) {
+  .booking-grid {
+    grid-template-columns: 1fr;   /* one per row on mobile */
+  }
+}
+ /* ============================
+   MOBILE FIX FOR BOOKING CARDS
+   ============================ */
+@media (max-width: 576px) {
+
+  .booking-grid {
+    grid-template-columns: 1fr !important;  /* 1 card per row */
+    gap: 12px !important;
+    padding: 0 8px;
+  }
+
+  .booking-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 12px !important;
+    border-radius: 14px !important;
+    
+  }
+
+  .booking-img {
+    height: 130px !important;  /* reduce image height */
+    border-radius: 12px !important;
+  }
+
+  
+  .status-badge {
+    font-size: 0.75rem !important;
+    padding: 5px 10px !important;
+  }
+
+  .btn-accept,
+  .btn-reject {
+    font-size: 0.9rem !important;
+    padding: 8px !important;
+    margin-top: 4px !important;
+  }
+}
+/* COMPACT BOOKING INFO — reduces card height and closes the gap */
+.booking-info {
+  padding: 8px 0 !important;       /* reduce inside space */
+}
+
+.booking-info h3 {
+  margin-bottom: 4px !important;   /* smaller gap */
+  font-size: 1.5rem !important;    /* reduce title size */
+}
+
+.booking-info p {
+  margin: 0 !important;            /* remove extra spacing */
+  padding: 0 !important;
+  line-height: 1.2 !important;     /* tighter */
+  font-size: 1.3rem !important;   /* reduce text size */
+  font-weight: 300px;
+}
+
+.status-badge {
+  margin: 4px 0 !important;        /* compact badge spacing */
+  padding: 4px 8px !important;
+  font-size: 0.75rem !important;
+}
+
+.btn-accept,
+.btn-reject {
+  margin-top: 4px !important;
+  padding: 6px !important;         /* smaller buttons */
+  font-size: 0.85rem !important;
+}
+/* ===================== DASHBOARD HEADER ===================== */
+.dashboard-header-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  padding: 20px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  margin-bottom: 25px;
+}
+
+/* Title + button row */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+/* Dashboard Button */
+.btn-dashboard {
+  background: var(--primary);
+  color: white !important;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-dashboard:hover {
+  background: rgb(56,34,34);
+  transform: translateY(-2px);
+}
+
+.dashboard-subtitle {
+  margin-top: 8px;
+  color: #181817;
+  font-size: 1.5rem;
+}
+
+/* ===================== RESPONSIVE HEADER ===================== */
+@media (max-width: 600px) {
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .btn-dashboard {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .dashboard-title {
+    font-size: 1.6rem;
+  }
+}
+/* FORCE dashboard button to be visible */
+/* FORCE Dashboard Button to show */
+.nav-dashboard-desktop,
+.nav-dashboard-mobile {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: rgb(79,49,49) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  padding: 6px 12px !important;
+}
+
+.nav-dashboard-desktop:hover,
+.nav-dashboard-mobile:hover {
+  background: rgb(56,34,34) !important;
+}
+
+
+/* =======================================================
+   CHAT BUBBLES (Dashboard messaging section)
+======================================================= */
+.message-item {
+  padding: 6px 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.message-item.sent {
+  background: #d7ffe1;
+  text-align: right;
+}
+
+.message-item.received {
+  background: #f5e3d8;
+  text-align: left;
+}
+
+.message-item small {
+  display: block;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.message-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+.message-input:focus {
+  border-color: rgb(79, 49, 49);
+  outline: none;
+  box-shadow: 0 0 6px rgba(79, 49, 49, 0.4);
+}
+
+.message-send-btn {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgb(79, 49, 49);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.message-send-btn:hover {
+  background: rgb(60, 35, 35);
+}
+.inbox-heading{
+  color:bisque;
+}
+
+@media (max-width: 576px) {
+  .message-box {
+    padding: 10px;
+  }
+
+  .message-item {
+    font-size: 0.8rem;
+  }
+}
+
+/* ========================= Show Page Styling ========================= */
+.map-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+  margin-top: 25px;
+}
+
+.show-container {
+  max-width:250px;
+  margin: 40px auto;
+  padding: 22px 26px;
+
+  /* 🌟 PREMIUM GLASS EFFECT */
+  background:bisque;
+  background-size: cover;       
+  background-repeat: no-repeat;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Title */
+.show-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  background-color: #C9A227;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 0.6px;
+}
+
+/* ===================== PREMIUM DETAILS CARD ===================== */
+.details-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0.25)
+  );
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  font-size:1.5rem;
+}
+
+/* LEFT-ALIGNED DETAIL ROWS */
+.detail-row {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  font-size: 2rem;
+  display: block;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row .label {
+  font-weight: 700;
+  margin-right: 6px;
+  color: var(--primary);
+  font-size:1.5rem;
+}
+
+.detail-row span:not(.label) {
+  font-weight: 500;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+/* ===================== FULL-WIDTH HERO IMAGE (FIXED) ===================== */
+
+/* Parent container */
+.full-width-image {
+  border: none !important;
+  margin: 8px 0 14px 0;
+  padding: 0 !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Base image styling */
+.details-main-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.details-main-image:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-strong);
+}
+
+/* ⭐ FINAL FIX — REDUCE PHOTO WIDTH ON DESKTOP */
+@media (min-width: 992px) {
+  .details-card .details-main-image {
+    width: 100% !important;     /* ⭐ Change width here */
+    max-width: 70% !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+}
+
+/* Desktop Height */
+@media (min-width: 768px) {
+  .details-main-image {
+    height: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .details-main-image {
+    height: 330px;
+  }
+}
+
+/* ===================== EDIT/DELETE BUTTONS ===================== */
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 20px 0;
+}
+
+.actions form {
+  margin-top: 0 !important;
+}
+
+.actions .btn,
+.actions button.btn,
+.actions a.btn {
+  width: 160px !important;
+  padding: 12px 18px !important;
+  font-size: 1.08rem !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-md) !important;
+
+  line-height: 1.2 !important;   
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+.edit-btn {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: #C9A227 !important;
+}
+
+.edit-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.delete-btn {
+  border-color: var(--danger);
+  color: var(--danger);
+  background-color: #C9A227 !important;
+}
+
+.delete-btn:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* ===================== MAP ===================== */
+#map {
+  height: 350px !important;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+/* ===================== STAR RATING ===================== */
+.star-rating {
+  direction: rtl;
+  display: inline-flex;
+  font-size: 3rem!important;
+}
+
+.star-rating input { display: none; }
+
+.star-rating label {
+  cursor: pointer;
+  color:white;
+  transition: 0.2s ease;
+  font-size: 2.5rem!important;
+ 
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #FF6B35;
+}
+
+/* ===================== REVIEW FORM ===================== */
+.review-form-wrapper form .form-control {
+  padding: 12px 14px;
+  font-size: 1.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+form button {
+  
+  margin-top: 6px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  transition: 0.3s ease;
+}
+
+form button:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.review-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  
+}
+
+.review-section .card {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+}
+
+.review-section .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.review-section .card-title {
+  font-weight: 700;
+  color: white;
+  font-size: 2rem!important;
+}
+
+.form-label { font-size: 1.5rem!important; }
+
+@media (min-width: 768px) {
+  .review-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .review-section .card {
+    max-width: 85%;
+    margin: 0 auto;
+  }
+}
+.main-experience{
+  display: flex;
+  justify-content: center;
+}
+
+.experience{
+      font-size: 2rem;
+}
+/* ========================= BOOKING BOX ========================= */
+.booking-box {
+  width: 100%;
+  max-width: 700px;
+  margin: 15px auto 25px auto;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+.booking-box label {
+  font-weight: 600;
+  font-size: 20px;
+  color: rgb(79, 49, 49);
+}
+
+.booking-box input {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid #d4d4d4;
+  background: #f9f9f9;
+}
+
+.booking-box input:focus {
+  border-color: rgb(79, 49, 49);
+  box-shadow: 0 0 5px rgba(79, 49, 49, 0.35);
+  outline: none;
+}
+
+.booking-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: rgb(79, 49, 49) !important;
+  border: none;
+  color: white;
+  margin-top: 12px;
+  transition: all 0.25s ease;
+}
+
+.booking-btn:hover {
+  background-color: rgb(56, 34, 34) !important;
+  transform: translateY(-2px);
+}
+
+/* ===================== RESPONSIVENESS ===================== */
+@media (min-width: 576px) {
+  .show-container { padding: 22px 26px; }
+  #map { height: 380px !important; }
+}
+
+@media (min-width: 768px) {
+  .show-title { font-size: 2.6rem; }
+  .detail-row { font-size: 1.20rem; }
+  #map { border-radius: var(--radius-lg); }
+}
+
+@media (min-width: 992px) {
+  .show-container { 
+    max-width: 1200px !important;  /* ⭐ perfect width */
+    margin: 40px auto !important;
+  }
+}
+
+
+  #map {
+    height: 300px !important;
+    width: 800px;          /* your custom width */
+    margin: 0 auto !important;  /* ⭐ centers horizontally */
+    display: block !important;  /* ⭐ ensures centering works */
+  }
+
+
+
+@media (min-width: 1200px) {
+  .show-title { font-size: 3rem; }
+}
+
+@media (max-width: 576px) {
+  .review-form-wrapper {
+    width: 100% !important;
+    padding: 0 5px;
+  }
+  .review-form-wrapper .form-control {
+    font-size: 1rem;
+  }
+}
+
+/* ===================== ANIMATION ===================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE REVIEW CARD ENLARGEMENT */
+@media (max-width: 768px) {
+  .review-section {
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+  }
+
+  .review-section .card {
+    max-width: 300px !important;
+    width: 90% !important;
+    padding: 24px 26px !important;
+    border-radius: 20px !important;
+  }
+
+  .review-section .card-title {
+    font-size: 1.3rem !important;
+  }
+
+  .review-section .card-subtitle {
+    font-size: 1.15rem !important;
+    
+  }
+
+  .review-section .card-text {
+    font-size: 1.1rem !important;
+  }
+}
+.mb-3{
+  
+  color: black;
+  font-size:1.9rem;
+  font-weight: 500px;
+}
+.guest-heading{
+  display: flex;
+  justify-content: center;
+}
+/* ================================================
+   📱 MOBILE RESPONSIVE FIXES (max-width: 576px)
+================================================ */
+
+@media (max-width: 576px) {
+
+  /* Main container */
+  .show-container {
+    padding: 14px 16px !important;
+    margin: 15px auto !important;
+    max-width: 100% !important;
+    border-radius: 14px !important;
+  }
+
+  /* Title */
+  .show-title {
+    font-size: 1.7rem !important;
+    padding: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Main listing image */
+  .details-main-image {
+    height: 180px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Details card */
+  .details-card {
+    padding: 14px 16px !important;
+    border-radius: 12px !important;
+    font-size: 1.1rem !important;
+  }
+
+  .detail-row {
+    padding: 6px 0 !important;
+    font-size: 1.2rem !important;
+  }
+
+  .detail-row .label {
+    font-size: 1.25rem !important;
+  }
+
+  /* Experience / Host info */
+  .experience {
+    font-size: 1.3rem !important;
+  }
+
+  /* Map */
+  #map {
+    height: 220px !important;
+    margin-top: 12px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Booking box */
+  .booking-box {
+    padding: 14px !important;
+    max-width: 95% !important;
+    margin: 18px auto !important;
+  }
+
+  .booking-box label {
+    font-size: 1.2rem !important;
+  }
+
+  .booking-box input {
+    padding: 8px 10px !important;
+    font-size: 1rem !important;
+  }
+
+  .booking-btn {
+    padding: 10px !important;
+    font-size: 1rem !important;
+    margin-top: 10px !important;
+  }
+
+  /* Review form */
+  .review-form-wrapper .form-control {
+    font-size: 1.1rem !important;
+    padding: 10px !important;
+  }
+
+  /* Review cards */
+  .review-section .card {
+    max-width: 92% !important;
+    padding: 20px !important;
+  }
+
+  .review-section .card-title {
+    font-size: 1.4rem !important;
+  }
+
+  .review-section .card-text {
+    font-size: 1.1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Heading: Guest / Experience / etc */
+  .guest-heading {
+    font-size: 1.4rem !important;
+    justify-content: center !important;
+  }
+
+  .mb-3 {
+    font-size: 1.35rem !important;
+    color: black !important;
+    margin-bottom: 6px !important;
+  }
+}
+/* ================================================
+   📱 MOBILE FONT SIZE FIX (max-width: 576px)
+================================================ */
+@media (max-width: 576px) {
+
+  /* Main container */
+  .show-container {
+    padding: 16px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Title */
+  .show-title {
+    font-size: 1.6rem !important;
+    padding: 6px !important;
+  }
+
+  /* Detail row text */
+  .detail-row {
+    font-size: 1.1rem !important;
+    padding: 6px 0 !important;
+  }
+
+  .detail-row .label {
+    font-size: 1.15rem !important;
+    margin-right: 4px !important;
+  }
+
+  /* Property Description, About This Place */
+  .details-card {
+    font-size: 1.1rem !important;
+    padding: 14px !important;
+  }
+
+  /* Large text inside cards (e.g., place description) */
+  .details-card span,
+  .details-card p {
+    font-size: 1.1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Image section */
+  .details-main-image {
+    height: 180px !important;
+  }
+
+  /* Booking box */
+  .booking-box label {
+    font-size: 1.15rem !important;
+  }
+
+  .booking-box input {
+    font-size: 1rem !important;
+    padding: 8px !important;
+  }
+
+  .booking-btn {
+    font-size: 1rem !important;
+    padding: 10px !important;
+  }
+
+  /* Review headings */
+  .mb-3 {
+    font-size: 1.3rem !important;
+  }
+
+  /* Guest heading */
+  .guest-heading {
+    font-size: 1.4rem !important;
+  }
+}
+/* =========================
+   📱 MOBILE FIX — Reduce Review Form Heading Sizes
+   ========================= */
+   @media (max-width: 576px) {
+
+    /* Heading: "Share Your Experience" */
+    .review-section .card-title,
+    .experience {
+      font-size: 1.4rem !important;
+    }
+  
+    /* Labels: Your Name, Rating, Experience */
+    .form-label,
+    .review-form-wrapper label,
+    .mb-3 {
+      font-size: 1.2rem !important;
+    }
+  
+    /* Reduce spacing */
+    .review-form-wrapper {
+      padding: 0 8px !important;
+    }
+  }
+  /* Prevent any container from overflowing and breaking footer layout */
+
+
+/* ========================= Index Page ========================= */
+/* ========================= LISTINGS WRAPPER ========================= */
+.listing-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 2300px;
+  margin: 0 auto !important;
+
+  padding: 40px 40px 70px 40px;
+
+  border-radius: 20px;
+  overflow: hidden; /* SUPER IMPORTANT */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 26px rgba(255, 228, 196, 0.45);
+
+
+}
+
+/* Background IMAGE (full cover always) */
+.listing-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;   /* top:0; left:0; right:0; bottom:0 */
+
+  background-image: url("https://res.cloudinary.com/dukrzznc4/image/upload/v1765311192/photo-1764377723685-31e60ed8e550_oypb7o.avif");
+  background-size: cover;       
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* Optional dark layer so cards pop */
+  background-color: rgba(0,0,0,0.15);
+  background-blend-mode: darken;
+
+  z-index: 0;
+}
+
+/* Put actual content above the background */
+.listing-wrapper > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Fix Bootstrap row pulling content outside the wrapper */
+.listing-wrapper .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Add spacing between cards */
+.listing-wrapper .col {
+  margin-bottom: 25px !important;
+}
+
+.page-container {
+  width: 98%;
+  max-width: 1900px;
+  margin: 0 auto;
+  padding-left: 12px;
+  padding-right: 12px;
+
+  flex: 1 !important;   /* footer fix */
+}
+
+/* Wider card grid */
+.row.row-cols-lg-3.row-cols-md-2.row-cols-sm-1 {
+  max-width: 1500px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* ========================= Cards (Final Styling) ========================= */
+
+
+.card img {
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  display:block;
+  background: rgba(0,0,0,0.04);
+}
+
+.card-body {
+  padding: 18px;
+  text-align: left;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  
+}
+
+.card-body p {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1.3;
+}
+
+/* price text inside p */
+.price {
+  font-size:2rem!important;
+  color: var(--primary);
+  font-weight:800;
+}
+
+/* listing grid */
+#listings,
+.listing-container,
+.cards-container {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  padding: 6px;
+  align-items: start;
+}
+/* Make listing background fully wide (break out of container) */
+.listing-wrapper-outer {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+
+/* ========================= RESPONSIVE LISTINGS ========================= */
+@media (max-width: 992px) {
+  .card img { height: 200px; }
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin: 8px;
+  }
+  .card img {
+    height: 160px;
+  }
+
+  /* show page stacks */
+  .show-layout { grid-template-columns: 1fr; }
+  .show-image {
+    max-height: 260px;
+  }
+  .map-container {
+    height: 220px !important;
+  }
+
+  /* form edit containers */
+  .form-container,
+  .edit-container {
+    padding: 16px;
+    width: 96%;
+    max-width: 720px;
+    margin: 16px auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .card img { height: 140px; }
+  .card-body { padding: 12px; }
+  .price {
+    font-size: 1.1rem;
+  }
+}
+/* ===================== CLEAN FINAL LISTING CARD STYLING ===================== */
+
+.card {
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: transform .22s cubic-bezier(.2,.9,.2,1),
+              box-shadow .22s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 18px 3px var(--accent);
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  background: rgba(0,0,0,0.04);
+}
+
+.card-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-body p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1.3;
+}
+
+/* price text inside p */
+.price {
+  font-size: 1.4rem;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+/* CLEAN grid layout */
+#listings,
+.listing-container,
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  padding: 6px;
+}
+/* ======================= PREMIUM MOBILE LISTING (2 PER ROW) ======================= */
+@media (max-width: 768px) {
+
+  /* Override Bootstrap row-cols-sm-1 */
+  .listing-wrapper.row {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 6px !important;
+  }
+
+  /* Cards inside mobile grid */
+  .listing-wrapper .card {
+    width: 100% !important;
+    max-width: 180px !important;   /* Adjust this value to make cards smaller/larger */
+    margin: 0 auto !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+  }
+
+  /* Mobile image height */
+  .listing-wrapper .card-img-top {
+    height: 120px !important;      /* change to 100px or 140px based on taste */
+    object-fit: cover !important;
+  }
+
+  /* Text spacing */
+  .listing-wrapper .card-body {
+    padding: 10px 12px !important;
+  }
+
+  .listing-wrapper .card-body p {
+    font-size: 0.9rem !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+    
+  }
+
+  .listing-wrapper .price {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+  }
+}
+/* MAKE LISTING TITLES MORE VISIBLE */
+.listingcard-text strong {
+  color:var(--primary) !important;       /* bright white */
+  text-shadow: 0 2px 6px rgba(0,0,0,0.55) !important;  /* glow for visibility */
+}
+
+/* Price also more visible */
+.listingcard-text {
+  color:var(--primary)!important;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* ===================== Filter Bar ===================== */
+.filter-bar {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+
+  padding: 16px 32px !important;         /* wider spacing */
+  background: rgba(110, 70, 60, 0.92) !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.28);
+  -webkit-overflow-scrolling: touch;
+
+  /* width: 100% !important;
+  max-width: 5000px !important;           */
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  backdrop-filter: blur(6px);
+  border:4px solid #fff7ed;
+}
+
+.filter-bar::-webkit-scrollbar { display: none; }
+
+/* filter card */
+.filter-item {
+  background: #fff7ed;
+  border: 1px solid rgba(255, 245, 235, 0.28);
+  border-radius: 10px;
+  padding: 14px;
+  min-width: 120px !important;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(255, 245, 235, 0.28);
+  transition: .18s ease;
+}
+
+.filter-item:hover {
+  background: var(--accent);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+.filter-icon {
+  font-size: 2rem;
+  color: rgba(110, 70, 60, 0.92);
+}
+
+.filter-label {
+  color: rgba(110, 70, 60, 0.92);
+  font-weight: 700;
+  font-size:1.3rem;
+}
+/* ============ PERFECT WIDTH FILTER BAR (Not too wide, not too small) ============ */
+/* .filter-bar {
+  width: 100%;
+  max-width: 10000px !important;   
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 16px 28px !important;
+  border-radius: 18px !important;
+} */
+/* ==================== RESPONSIVE FILTER BAR ==================== */
+
+/* Desktop: wide, elegant */
+.filter-bar {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 16px 28px !important;
+
+  background: var(--primary) !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.28);
+
+  width: 100%;
+  max-width: 1700px !important;     /* ✨ perfect width */
+  margin: 20px auto !important;
+
+  backdrop-filter: blur(6px);
+  /* border:4px solid bisque; */
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+
+
+/* Each filter option */
+.filter-item {
+  flex: 0 0 auto;                   /* ensures horizontal scroll works */
+  padding: 20px;
+  min-width: 120px;
+  border-radius: 12px;
+  text-align: center;
+  background: #fff7ed;
+  transition: .2s ease;
+}
+.filter-item:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+
+/* ==================== TABLET (≤ 992px) ==================== */
+@media (max-width: 992px) {
+  .filter-bar {
+    max-width: 95% !important;       /* shrink width slightly */
+    padding: 14px 20px !important;
+    gap: 14px;
+  }
+
+  .filter-item {
+    min-width: 120px !important;
+    padding: 12px !important;
+  }
+}
+
+
+/* ==================== MOBILE (≤ 768px) ==================== */
+@media (max-width: 768px) {
+
+  .filter-bar {
+    max-width: 96% !important;
+    padding: 12px 16px !important;
+    gap: 12px;
+    border-radius: 14px !important;
+  }
+
+  .filter-item {
+    min-width: 100px !important;
+    padding: 10px !important;
+  }
+
+  .filter-icon {
+    font-size: 1.4rem !important;
+  }
+
+  .filter-label {
+    font-size: 0.8rem !important;
+  }
+}
+
+
+/* ==================== SMALL MOBILE (≤ 480px) ==================== */
+@media (max-width: 480px) {
+
+  .filter-bar {
+    max-width: 100% !important;
+    padding: 10px 10px !important;
+    gap: 10px;
+  }
+
+  .filter-item {
+    min-width: 90px !important;
+    padding: 8px !important;
+  }
+
+  .filter-icon {
+    font-size: 1.2rem !important;
+  }
+
+  .filter-label {
+    font-size: 0.75rem !important;
+  }
+}
+              /* ===== WISHLIST HEART ON CARD ===== */
+
+.listing-card {
+  position: relative;
+}
+
+/* Position heart in corner */
+.wishlist-form-card {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 30;
+  margin: 0;
+}
+
+/* PURE ICON BUTTON – no brown bg, no outline */
+.wishlist-btn-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  cursor: pointer;
+}
+
+/* Kill all weird states coming from global button styles */
+.wishlist-btn-card:hover,
+.wishlist-btn-card:focus,
+.wishlist-btn-card:active {
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Just the heart icon */
+.wishlist-btn-card i {
+  pointer-events: none;          /* click goes to button, not icon */
+  font-size: 1.6rem;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+/* Saved vs unsaved hearts */
+.saved-heart {
+  color: #ff2e63!important;                /* filled heart color */
+}
+
+.unsaved-heart {
+  color: #ffffff;                /* outline heart color */
+  text-shadow: 0 0 4px rgba(0,0,0,0.6);
+}
+
+/* Cute hover pop */
+.wishlist-btn-card:hover i {
+  transform: scale(1.15);
+}
+
+/* ===================== Footer ===================== */
+footer {
+  background: #fff7ed;
+  color: var(--primary);
+  padding: 48px 24px;
+  margin-top: 40px;
+  border-radius: 0;
+  box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.18);
+  width: 100%;
+}
+
+.f-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.f-info-socials i {
+  font-size: 2.5rem;
+  margin: 0 10px;
+  color: var(--primary);
+  transition: .25s ease;
+}
+
+.f-info-socials i:hover {
+  transform: translateY(-4px);
+  color: var(--primary);
+}
+
+.f-info-links a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: .25s ease;
+}
+
+.f-info-links a:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
+
+
+
+/* ========================= NAVBAR FINAL CLEAN VERSION ========================= */
+
+/* Base navbar layout (desktop) */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff7ed;
+  padding: 18px 24px !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  margin: 18px 0;
+  margin-bottom: 12px;
+}
+
+/* Brand */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.navbar-brand i {
+  font-size: 2.2rem;
+  color: var(--primary);
+}
+
+.brand-text {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: "Dancing Script", cursive;
+}
+
+/* Nav links (desktop) */
+.navbar-nav .nav-link {
+  background: rgba(0,0,0,0.05);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--primary);
+  transition: .15s;
+}
+
+.navbar-nav .nav-link:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Username ALWAYS clean */
+.nav-link.username {
+  background: none !important;
+  padding: 0;
+  color: var(--primary) !important;
+  font-weight: 700;
+}
+
+/* Search bar desktop */
+.search-desktop {
+ 
+  display: flex;
+  
+}
+
+.search-mobile {
+  display: none !important;
+}
+/* ===============================
+   SEARCH BAR — WIDTH + FONT SIZE
+================================*/
+
+/* Desktop search bar */
+.search-desktop .search-form input.form-control {
+  width: 350px !important;     /* Increase width */
+  font-size: 1.5rem !important;
+  padding: 10px 14px !important;
+}
+
+/* Mobile search bar */
+.search-mobile .search-form input.form-control {
+  width: 100% !important;
+  font-size: 1.05rem !important;
+  padding: 12px 14px !important;
+}
+
+/* Search button styling */
+/* Match SEARCH button styling to nav buttons */
+.btn-search {
+  background-color: #f7e9d7 !important;       /* same bisque background */
+  color: #4F3131 !important;                  /* same brown text */
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 8px 18px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12) !important;
+  transition: all 0.2s ease-in-out !important;
+
+}
+
+/* Hover to match nav button hover */
+.btn-search:hover {
+  color: rgb(210, 203, 203);
+  background-color:rgb(210, 203, 203) !important;       /* slightly darker bisque */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15) !important;
+}
+/* Ensure search input + button stay in one row */
+.search-form {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* Prevent the input from becoming 100% width */
+.search-form input.form-control {
+  flex: 1 !important;   /* Takes remaining space */
+  width: auto !important;
+}
+.btn-search {
+  padding: 12px 24px !important;   /* Bigger button */
+  font-size: 1.1rem !important;    /* Larger text */
+  border-radius: 12px !important;  /* Softer corners */
+}
+
+/* =======================================================================
+   =======================   MOBILE NAVBAR (≤768px)   =====================
+   ======================================================================= */
+   @media (max-width: 768px) {
+
+    /* Main navbar becomes vertical stack */
+    .navbar {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 5px 5px !important;
+
+      gap: 12px;
+    }
+  
+    /* -------- ROW 1: Brand + Hi, Sara + Toggler -------- */
+    .navbar-header-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* brand left + toggler right */
+    }
+  
+    /* Greeting positioned beside toggler */
+    .navbar-header-row .username {
+      margin-left: auto;
+      margin-right: 14px;
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+  
+    /* Ensure toggler stays right */
+    .navbar-toggler {
+      margin-left: 0 !important;
+    }
+  
+    /* -------- ROW 2: Nav Links in ONE SINGLE LINE -------- */
+    .navbar-collapse .navbar-nav {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 0;
+    }
+  
+    .navbar-nav .nav-link {
+      background: #f3e0cd;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+  
+    /* -------- ROW 3: Mobile Search (full width) -------- */
+    .search-mobile {
+      display: flex !important;
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .search-mobile .search-form {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+    }
+  
+    /* Desktop search stays hidden on mobile */
+    .search-desktop {
+      display: none !important;
+    }
+  }
+  @media(max-width: 768px) {
+
+  /* Force small navbar height */
+  .navbar,
+  .navbar.navbar-expand-md,
+  .navbar .container-fluid {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  /* Reduce gap between stacked elements */
+  .navbar {
+    gap: 4px !important;
+  }
+
+  /* Reduce height of brand row */
+  .navbar-brand i {
+    font-size: 1.6rem !important;
+  }
+
+  .brand-text {
+    font-size: 1.2rem !important;
+  }
+
+  /* Shrink toggler */
+  .navbar-toggler {
+    padding: 2px 6px !important;
+  }
+}
+@media (max-width: 768px) {
+
+  /* FIX 1 — Prevent navbar from pulling left */
+  .navbar {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    justify-content: center !important;
+  }
+
+  /* FIX 2 — Navbar inner container must not shrink left */
+  .navbar .container-fluid {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* FIX 3 — Center the collapse content */
+  .navbar-collapse {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+/* ================== SMALLER TOGGLER BUTTON ================== */
+
+.navbar-toggler {
+  padding: 4px 6px !important;   /* reduce button size */
+  width: 36px !important;         /* make it narrower */
+  height: 32px !important;        /* make it shorter */
+  border-radius: 8px !important;  /* optional: softer corners */
+}
+
+/* make the icon inside smaller */
+.navbar-toggler-icon {
+  width: 18px !important;
+  height: 18px !important;
+}
+nav.navbar {
+  margin-bottom: 20px !important;
+}
+
+  
+  
+  /* =======================================================================
+     =======================   DESKTOP NAVBAR (≥768px)   ====================
+     ======================================================================= */
+  @media (min-width: 768px) {
+  
+    /* Collapse section becomes a clean horizontal layout */
+    .navbar-collapse {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100%;
+    }
+  
+    /* Left side nav links */
+    .navbar-nav {
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 18px !important;
+    }
+  
+    /* Right side user + logout */
+    .nav-user-section {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 18px !important;
+    }
+  
+    /* Username cleanup */
+    .nav-link.username {
+      padding: 0 !important;
+      margin: 0 !important;
+      background: transparent !important;
+    }
+  
+    .logout-link {
+      display: inline-flex !important;
+      align-items: center;
+    }
+  
+    /* Desktop search visible */
+    .search-desktop {
+      display: flex !important;
+    }
+  
+    /* Mobile search hidden */
+    .search-mobile {
+      display: none !important;
+    }
+  }
+  @media (max-width: 576px) {
+    .navbar {
+      margin-bottom: 16px;
+    }};
+    
+/* ================= Navbar End ================= */
+
+/* ============================================================
+   INFO CARDS — PREMIUM MULTI-BACKGROUND VERSION
+============================================================ */
+
+/* Full-width wrapper */
+.info-row-wrapper {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 0;
+  margin-top: 40px;
+}
+
+/* Main grid */
+.info-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+
+  max-width: 1900px;
+  width: 100%;
+
+  margin: 0 auto 30px auto;
+  padding: 0 20px;
+}
+
+/* Base card style */
+.info-card {
+  text-align: center;
+  padding: 24px 20px;
+  border-radius: 16px;
+
+  /* FIXED: allow responsive height */
+  min-height: 300px;
+  height: 300px;
+
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 26px rgba(255, 228, 196, 0.45);
+
+
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+}
+
+/* Background gradient overlay */
+.info-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.35),
+      rgba(0,0,0,0.55)
+  );
+  z-index: 1;
+}
+
+.info-card * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ================= BACKGROUND IMAGES ================= */
+.card-1 {
+  background-image: url("https://res.cloudinary.com/dukrzznc4/image/upload/v1765303623/premium_photo-1764540685473-a5573ce7160d_ynlwfx.avif");
+}
+
+.card-2 {
+  background-image: url("https://res.cloudinary.com/dukrzznc4/image/upload/v1765307157/premium_photo-1684175656320-5c3f701c082c_ubdadg.avif");
+}
+
+.card-3 {
+  background-image: url("https://res.cloudinary.com/dukrzznc4/image/upload/v1765014382/mainscreenimg_dqqzrx.avif");
+}
+
+/* ================= ICON / TITLE / TEXT ================= */
+.info-card i {
+  font-size: 2.2rem;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.info-card h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.info-card p {
+  font-size: 1.5rem;
+  color: white;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+/* Tablet - 2 cards */
+@media (max-width: 992px) {
+  .info-row {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 16px;
+    justify-items: center;
+  }
+
+  .info-card {
+    max-width: 420px;
+    width: 100%;
+    height: 260px;        /* Shorter for tablets */
+    min-height: 260px;
+  }
+}
+
+/* Mobile - 1 card */
+@media (max-width: 600px) {
+  .info-row {
+    grid-template-columns: 1fr;
+    padding: 0 12px;
+    gap: 20px;
+  }
+
+  .info-card {
+    max-width: 380px;
+    margin: 0 auto;
+
+    /* KEY FIX: perfect size for mobile */
+    height: 220px;
+    min-height: 220px;
+
+    padding: 20px 16px;
+  }
+
+  .info-card i {
+    font-size: 1.8rem;
+  }
+
+  .info-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .info-card p {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 600px) {
+  .info-card {
+    height: 160px !important;
+    min-height: 50px !important;
+   
+   
+  }
+}
+
+
+
+
+                            /*Chat css full*/
+/* CHAT WRAPPER */
+.chat-wrapper {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+}
+
+/* HEADER */
+.chat-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.chat-header h2 {
+  margin: 0;
+  color: var(--primary);
+}
+
+/* CHAT BOX */
+.chat-box {
+  height: 420px;
+  overflow-y: auto;
+  padding: 15px;
+  background: #fdf9f5;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;      /* ⭐ Forces vertical stacking */
+  gap: 10px;                   /* space between bubbles */
+}
+
+/* MESSAGE BUBBLES */
+.bubble {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  position: relative;
+  display: inline-block;
+  line-height: 1.3rem;
+}
+
+/* ⭐ GUEST/HOST MESSAGE ALIGNMENT */
+.me {
+  align-self: flex-end;        /* ⭐ Push to right */
+  background: var(--primary);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.them {
+  align-self: flex-start;      /* ⭐ Push to left */
+  background: #ececec;
+  color: #333;
+  border-bottom-left-radius: 4px;
+}
+
+/* TIMESTAMP */
+.bubble .time {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* INPUT AREA */
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex-grow: 1;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.chat-input button {
+  padding: 12px 18px;
+  background: var(--primary);
+  color: white;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.badge-unread {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #d9534f;
+  color: white;
+  padding: 4px 9px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+                                    /* Info Card UI done */
+
+/* ============================================================
+                                     Add New Listing Full Css
+============================================================ */
+
+/* ---------- FULL PAGE BACKGROUND ---------- */
+.add-listing-bg {
+  min-height: 100vh;
+  width: 100%;
+  padding: 140px 0 80px 0; /* top spacing | bottom */
+
+  background-image: url("https://res.cloudinary.com/dukrzznc4/image/upload/v1764939446/background_listing_hnccol.avif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.add-listing-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 245, 235, 0.45); /* warm beige tint */
+  backdrop-filter: blur(1px);
+  z-index: 0;
+}
+
+/* ---------- FORM CONTAINER ---------- */
+.form-container {
+  position: relative;
+  z-index: 1;
+
+  background: #fffaf3;
+  border-radius: 16px;
+  padding: 35px 40px;
+  max-width: 1000px;   /* width of form */
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Title */
+.form-container h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-container h1::after {
+  content: "";
+  display: block;
+  width: 130px;
+  height: 6px;
+  margin: 10px auto 20px;
+  background: rgba(255, 176, 176, 0.4);
+  border-radius: 5px;
+}
+
+/* ---------- Input Fields ---------- */
+.form-input {
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  padding: 12px 14px;
+  font-size: 1rem;
+  transition: 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(79,49,49,0.25);
+}
+
+/* Labels */
+.form-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #5a3c3c;
+  margin-bottom: 6px;
+}
+
+/* Margin between fields */
+.mb-3 { margin-bottom: 1.2rem; }
+
+/* ---------- FEATURES BOX ---------- */
+.mb-3 .row {
+  background: #fffaf3;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+
+/* Checkboxes */
+.mb-3 .col-6 input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+/* ---------- SUBMIT BUTTON ---------- */
+.submit-btn {
+  display: block !important;
+  width: auto !important;              /* cancels bootstrap w-100 */
+  max-width: 340px !important;         /* button width */
+  margin: 20px auto 0 auto !important; /* center it */
+  
+  background: linear-gradient(180deg, var(--primary), rgba(79,49,49,0.92));
+  border-radius: 12px;
+  padding: 14px 28px;                  
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  transition: 0.25s ease;
+}
+
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22);
+}
+/* ===================== MOBILE RESPONSIVE FIX ===================== */
+
+/* --- Tablet & small laptops (<=768px) --- */
+@media (max-width: 768px) {
+
+  .add-listing-bg {
+    padding: 70px 0 50px 0 !important;
+    background-position: center top !important;
+  }
+
+  .form-container {
+    width: 90% !important;
+    max-width: 550px !important;
+    padding: 22px !important;
+    border-radius: 14px !important;
+  }
+
+  .form-container h1 {
+    font-size: 1.6rem !important;
+  }
+
+  .mb-3 .row {
+    padding: 14px !important;
+  }
+}
+
+/* --- Phones (<=480px) --- */
+@media (max-width: 480px) {
+
+  .add-listing-bg {
+    padding: 60px 0 40px 0 !important;
+    background-size: cover !important;
+    background-position: center top !important;
+  }
+
+  .form-container {
+    width: 95% !important;
+    max-width: 420px !important;
+    padding: 16px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Features list → full width */
+  .mb-3 .row .col-6 {
+    width: 100% !important;
+  }
+
+  .form-container h1 {
+    font-size: 1.35rem !important;
+  }
+}
+
+/* --- Ultra-small phones (<=360px) --- */
+@media (max-width: 360px) {
+
+  .form-container {
+    width: 96% !important;
+    max-width: 350px !important;
+    padding: 14px !important;
+  }
+
+  .form-input {
+    font-size: 0.9rem !important;
+  }
+
+  .submit-btn {
+    font-size: 1rem !important;
+    padding: 12px !important;
+  }
+}
+/* ============================================================
+   CHAT ROOM PAGE — PREMIUM WANDERLUST THEME
+============================================================ */
+.chat-wrapper {
+  max-width: 700px;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+
+/* HEADER */
+.chat-header {
+  border-bottom: 2px solid rgba(79,49,49,0.2);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.chat-header h2 {
+  font-size: 1.4rem;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* CHAT AREA */
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* CUSTOM SCROLLBAR */
+.chat-box::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+  background: rgba(79,49,49,0.3);
+  border-radius: 20px;
+}
+
+/* CHAT BUBBLES */
+.bubble {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  position: relative;
+  line-height: 1.4;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Sender bubbles */
+.me {
+  align-self: flex-end;
+  background: var(--primary);
+  color: white;
+  border-bottom-right-radius: 2px;
+}
+
+/* Receiver bubbles */
+.them {
+  align-self: flex-start;
+  background: #f7e6d9;
+  color: #3d2b1f;
+  border-bottom-left-radius: 2px;
+}
+
+.time {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 3px;
+  text-align: right;
+}
+
+/* INPUT BAR */
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 2px solid rgba(79,49,49,0.15);
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid rgba(79,49,49,0.3);
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s;
+}
+
+.chat-input input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 6px rgba(79,49,49,0.3);
+}
+
+.chat-input button {
+  background: var(--primary);
+  color: white;
+  padding: 0 20px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.chat-input button:hover {
+  background: rgb(60, 35, 35);
+}
+
+
+/* ============================================================
+   INBOX PAGE — CHAT THREAD LIST
+============================================================ */
+.inbox-container {
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.inbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.inbox-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: 0.25s ease;
+}
+
+.inbox-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
+}
+
+.inbox-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.inbox-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.inbox-sub {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.inbox-preview {
+  font-size: 0.85rem;
+  color: #444;
+}
+
+/* Unread badge */
+.unread-badge {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  background: var(--accent);
+  color: white;
+  padding: 3px 9px;
+  font-size: 0.75rem;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+
+/* ============================================================
+   RESPONSIVENESS
+============================================================ */
+@media (max-width: 768px) {
+  .chat-wrapper {
+      height: 90vh;
+      margin: 10px;
+      padding: 15px;
+  }
+
+  .bubble {
+      max-width: 85%;
+      font-size: 0.95rem;
+  }
+
+  .inbox-item {
+      padding: 14px;
+      gap: 12px;
+  }
+
+  .inbox-img {
+      width: 55px;
+      height: 55px;
+  }
+
+  .inbox-title {
+      font-size: 1rem;
+  }
+}
+
+/* Chat fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================
+   ⭐ FINAL FIX — FOOTER ALWAYS AT BOTTOM ON DESKTOP
+============================================================ */
+/* Wrap your inbox content in <div class="inbox-page"> */
+.inbox-page {
+    min-height: calc(100vh - 220px); 
+    /* navbar (80px) + footer (140px) */
+    display: block;
+}
+
+/* Chat page should also not allow footer to rise */
+.chat-wrapper {
+    margin-bottom: 120px; 
+}
+                        /* ===========================
+                             LOGIN PAGE STYLES
+                          =========================== */
+/* ===========================
+   LOGIN BACKGROUND WRAPPER
+=========================== */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+  height: auto;
+
+  background-image: url("https://res.cloudinary.com/dukrzznc4/image/upload/v1765363109/photo-1616046229478-9901c5536a45_qxfhrp.avif");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  position: relative;
+}
+
+.login-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(1px);
+  z-index: 0;
+}
+
+/* Ensure login card stays above overlay */
+.login-container {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1000px!important;
+  width: 90%;
+  margin: 100px auto;
+  background: #fff7ef;
+  padding: 100px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  min-height: 500px;
+}
+
+/* Heading */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  color: rgb(79, 49, 49);
+  letter-spacing: 0.5px;
+}
+
+/* Labels */
+.login-container .form-label {
+  font-weight: 600;
+  color: rgb(79, 49, 49);
+}
+
+/* Inputs */
+.login-container input.form-control {
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid #d9c9c9;
+  transition: all 0.25s ease;
+}
+
+.login-container input.form-control:focus {
+  border-color: rgb(79, 49, 49);
+  box-shadow: 0 0 8px rgba(79, 49, 49, 0.3);
+}
+
+/* ===========================
+   LOGIN BUTTON
+=========================== */
+.login-container button,
+.login-btn {
+  width: 180px;
+  display: block;
+  margin: 25px auto 0;
+  background: rgb(79, 49, 49);
+  border: none;
+  padding: 12px;
+  border-radius: 20px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  transition: 0.3s ease;
+  text-align: center;
+}
+
+.login-container button:hover {
+  background: rgb(102, 64, 64);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   ERROR BOX
+=========================== */
+.alert-danger {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+/* ===========================
+   FOOTER PUSH
+=========================== */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   RESPONSIVE FIXES
+=========================== */
+@media (max-width: 576px) {
+  .login-container {
+      margin-top: 40px;
+      padding: 24px;
+  }
+
+  .login-container button {
+      font-size: 16px;
+  }
+}
+.login-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.05) 35%,
+      rgba(0, 0, 0, 0.05) 65%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+.login-card-blur-bg {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  inset: 0;
+  margin: auto;
+  filter: blur(18px);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  z-index: 0;
+}
+
+           /* ===========================
+                  signup css
+=========================== */ 
+/* ===========================
+   SIGNUP PAGE WRAPPER
+   (Background Image + Layout)
+=========================== */
+
+.signup-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 💥 Now centered vertically */
+
+  min-height: 100vh;
+  height: auto;
+
+  background-image: url("https://res.cloudinary.com/dukrzznc4/image/upload/v1765359683/photo-1506744038136-46273834b3fb_uqba60.avif");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  position: relative;
+}
+
+
+.signup-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(1px);
+  z-index: 0;
+}
+
+/* ===========================
+   SIGNUP CARD CONTAINER
+=========================== */
+
+.signup-container {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 1000px;
+  max-height: 700px;
+  padding:100px;
+  background: #fff7ef;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.4s ease;
+}
+
+.signup-title {
+  font-weight: 700;
+  color: rgb(79, 49, 49);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* ===========================
+   FORM FIELDS
+=========================== */
+
+.signup-container .form-label {
+  font-weight: 600;
+  color: rgb(79, 49, 49);
+}
+
+.signup-container input.form-control {
+  border-radius: 10px;
+  border: 1.5px solid #d9c9c9;
+  padding: 10px 14px;
+  transition: 0.25s;
+}
+
+.signup-container input.form-control:focus {
+  border-color: rgb(79, 49, 49);
+  box-shadow: 0 0 8px rgba(79, 49, 49, 0.3);
+}
+
+/* ===========================
+   SIGNUP BUTTON
+=========================== */
+
+.signup-btn {
+  width: 180px;
+  display: block;
+  margin: 25px auto 0;
+  background: rgb(79, 49, 49);
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.signup-btn:hover {
+  background: rgb(102, 64, 64);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+
+@media (max-width: 768px) {
+  .signup-wrapper {
+    min-height: 900px; /* extra height for stacked inputs */
+  }
+}
+
+@media (max-width: 576px) {
+  .signup-container {
+    padding: 24px;
+    max-width: 340px;
+  }
+
+  .signup-btn {
+    width: 150px;
+    font-size: 15px;
+  }
+}
+/* =========================================
+   NAVBAR FIX FOR AUTH PAGES
+========================================= */
+
+nav.navbar {
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar-collapse {
+  position: relative;
+  z-index: 1001;
+}
+
+/* Auth wrappers stay behind navbar */
+.login-wrapper,
+.signup-wrapper {
+  position: relative;
+  z-index: 0;
+}
+
+.login-wrapper::before,
+.login-wrapper::after,
+.signup-wrapper::before,
+.signup-wrapper::after {
+  z-index: -1;
+}
+
+/* =========================================
+   MOBILE NAVBAR LAYOUT FIX
+========================================= */
+
+@media (max-width: 768px) {
+
+  /* Shrink navbar height */
+  .navbar {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  /* Proper dropdown alignment & background */
+  .navbar-collapse {
+    position: absolute !important;
+    top: 100%;
+    left: 0 !important;
+    width: 100% !important;
+    background: #fff3e6;
+    padding: 15px 20px;
+    border-radius: 0 0 16px 16px;
+    z-index: 2000;
+  }
+
+  /* Stack menu items neatly */
+  .navbar-collapse .navbar-nav {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 12px;
+  }
+
+  /* Mobile menu buttons */
+  .navbar-collapse .nav-link,
+  .navbar-collapse .username {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #f2e2d2;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+    color: rgb(79, 49, 49) !important;
+  }
+
+  .navbar-collapse .nav-link:hover {
+    background: #e8d4c4;
+  }
+
+  /* User section */
+  .nav-user-section {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  /* Mobile search spacing reduced */
+  .search-wrapper.d-md-none {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .search-wrapper.d-md-none .form-control {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .search-wrapper.d-md-none .btn-search {
+    padding: 6px 12px !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Greeting smaller */
+  .nav-greeting {
+    font-size: 0.9rem !important;
+    margin: 2px 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Toggler reduced */
+  .navbar-toggler {
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+    padding: 4px 6px !important;
+  }
+}
+
+/* Mobile greeting style */
+.mobile-greeting {
+  font-size: 1rem;
+  color: rgb(79, 49, 49);
+  opacity: 0.9;
+}
+

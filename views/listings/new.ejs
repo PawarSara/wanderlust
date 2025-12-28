@@ -1,0 +1,127 @@
+<% layout('layouts/boilerplate') %>
+
+<% 
+  // Ensure listing and features are defined to avoid undefined errors
+  const currentListing = listing || {}; 
+  currentListing.features = currentListing.features || [];
+%>
+
+<div class="add-listing-bg">
+  <div class="form-container">
+    
+  <h1>Add a New Listing</h1>
+
+  <% if (typeof error !== 'undefined') { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+
+  <form id="listingForm" method="POST" action="/listings" class="listing-form needs-validation" novalidate enctype="multipart/form-data">
+    
+    <!-- Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title:</label>
+      <input id="title" name="listing[title]" type="text" placeholder="Enter Title" 
+             class="form-control form-input" required
+             value="<%= currentListing.title || '' %>">
+      <div class="invalid-feedback">Please enter a title.</div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea id="description" name="listing[description]" placeholder="Enter your description" 
+                class="form-control form-input" required><%= currentListing.description || '' %></textarea>
+      <div class="invalid-feedback">Please enter a description.</div>
+    </div>
+
+    <!-- Price -->
+    <div class="mb-3">
+      <label for="price" class="form-label">Price:</label>
+      <input id="price" name="listing[price]" type="number" min="1" placeholder="Enter Price" 
+             class="form-control form-input" required
+             value="<%= currentListing.price || '' %>">
+      <div class="invalid-feedback">Please enter a valid price (greater than 0).</div>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Image:</label>
+      <input id="image" name="image" type="file" class="form-control form-input">
+    </div>
+
+    <!-- Country -->
+    <div class="mb-3">
+      <label for="country" class="form-label">Country:</label>
+      <input id="country" name="listing[country]" type="text" placeholder="Enter country" 
+             class="form-control form-input" required
+             value="<%= currentListing.country || '' %>">
+      <div class="invalid-feedback">Please enter a country.</div>
+    </div>
+
+    <!-- Location -->
+    <div class="mb-3">
+      <label for="location" class="form-label">Location:</label>
+      <input id="location" name="listing[location]" type="text" placeholder="Enter location" 
+             class="form-control form-input" required
+             value="<%= currentListing.location || '' %>">
+      <div class="invalid-feedback">Please enter a location.</div>
+    </div>
+
+    <!-- Features -->
+    <div class="mb-3">
+      <label class="form-label">Features:</label><br><br>
+      <div class="row g-2">
+        <div class="col-6">
+          <input type="checkbox" name="listing[features][]" value="pool" <%= currentListing.features.includes('pool') ? 'checked' : '' %>> Pool<br>
+          <input type="checkbox" name="listing[features][]" value="beach" <%= currentListing.features.includes('beach') ? 'checked' : '' %>> Beachfront<br>
+          <input type="checkbox" name="listing[features][]" value="mountain" <%= currentListing.features.includes('mountain') ? 'checked' : '' %>> Mountain View<br>
+          <input type="checkbox" name="listing[features][]" value="fireplace" <%= currentListing.features.includes('fireplace') ? 'checked' : '' %>> Fireplace<br>
+          <input type="checkbox" name="listing[features][]" value="hottub" <%= currentListing.features.includes('hottub') ? 'checked' : '' %>> Hot Tub<br>
+        </div>
+        <div class="col-6">
+          <input type="checkbox" name="listing[features][]" value="pet" <%= currentListing.features.includes('pet') ? 'checked' : '' %>> Pet Friendly<br>
+          <input type="checkbox" name="listing[features][]" value="wifi" <%= currentListing.features.includes('wifi') ? 'checked' : '' %>> Wifi<br>
+          <input type="checkbox" name="listing[features][]" value="parking" <%= currentListing.features.includes('parking') ? 'checked' : '' %>> Parking<br>
+          <input type="checkbox" name="listing[features][]" value="ac" <%= currentListing.features.includes('ac') ? 'checked' : '' %>> Air Conditioning<br>
+          <input type="checkbox" name="listing[features][]" value="kitchen" <%= currentListing.features.includes('kitchen') ? 'checked' : '' %>> Kitchen<br>
+          <input type="checkbox" name="listing[features][]" value="lake" <%= currentListing.features.includes('lake') ? 'checked' : '' %>> Lakefront<br>
+          <input type="checkbox" name="listing[features][]" value="farm" <%= currentListing.features.includes('farm') ? 'checked' : '' %>> Farm Stay<br>
+        </div>
+      </div>
+      <div class="text-danger mt-1" id="featuresError" style="display:none;">Please select at least one feature.</div>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-danger w-100 submit-btn">Submit</button>
+  </form>
+</div>
+</div>
+
+
+<script>  
+(function() {
+  'use strict';
+  const form = document.getElementById('listingForm');
+
+  form.addEventListener('submit', function(event) {
+    // Browser validation
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    // Features validation
+    const features = form.querySelectorAll('input[name="listing[features][]"]:checked');
+    const featuresError = document.getElementById('featuresError');
+    if (features.length === 0) {
+      event.preventDefault();
+      event.stopPropagation();
+      featuresError.style.display = 'block';
+    } else {
+      featuresError.style.display = 'none';
+    }
+
+    form.classList.add('was-validated');
+  }, false);
+})();
+</script>

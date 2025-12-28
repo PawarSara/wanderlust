@@ -1,0 +1,67 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="chat-wrapper">
+
+  <!-- HEADER -->
+  <div class="chat-header">
+
+    <% if (listing) { %>
+      <h2><%= listing.title %> — Chat</h2>
+      <p style="opacity:0.7;">
+        Talking with 
+        <strong>
+          <%= chat.host._id.toString() === currentUserId.toString()
+               ? chat.guest.username
+               : chat.host.username %>
+        </strong>
+      </p>
+    <% } else { %>
+      <h2>Listing Removed — Chat</h2>
+      <p style="opacity:0.7;">
+        Talking with 
+        <strong>
+          <%= chat.host._id.toString() === currentUserId.toString()
+               ? chat.guest.username
+               : chat.host.username %>
+        </strong>
+      </p>
+    <% } %>
+
+  </div>
+
+  <!-- CHAT BOX -->
+  <div class="chat-box" id="chatBox">
+    <% chat.messages.forEach(m => { %>
+      <div class="bubble <%= m.sender._id.toString() === currentUserId.toString() ? 'me' : 'them' %>">
+        <%= m.text %>
+        <span class="time">
+          <%= new Date(m.timestamp).toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' }) %>
+        </span>
+      </div>
+    <% }) %>
+  </div>
+
+  <!-- INPUT BAR -->
+  <% if (listing) { 
+      const actionUrl = mode === "thread"
+        ? `/chat/thread/${chat._id}/send`
+        : `/chat/${listing._id}/send`;
+  %>
+    <form class="chat-input" method="POST" action="<%= actionUrl %>">
+      <input type="text" name="message" placeholder="Type a message..." required>
+      <button>Send</button>
+    </form>
+  <% } else { %>
+    <!-- listing deleted → disable chat -->
+    <div class="chat-input">
+      <input type="text" placeholder="Listing removed — Chat disabled" disabled>
+      <button disabled>Send</button>
+    </div>
+  <% } %>
+
+</div>
+
+<script>
+  const box = document.getElementById("chatBox");
+  if (box) box.scrollTop = box.scrollHeight;
+</script>
