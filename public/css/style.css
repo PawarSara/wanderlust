@@ -1389,8 +1389,8 @@ form button:hover {
 }
 
 .review-section .card-title {
-  font-weight: 700;
-  color: white;
+  font-weight: 500;
+  color: black;
   font-size: 2rem!important;
 }
 
@@ -1610,7 +1610,7 @@ form button:hover {
 
   /* Booking box */
   .booking-box {
-    padding: 14px !important;
+    padding: 12px !important;
     max-width: 95% !important;
     margin: 18px auto !important;
   }
@@ -1663,6 +1663,19 @@ form button:hover {
     margin-bottom: 6px !important;
   }
 }
+.review-section .card {
+  max-width: 550px !important;
+  width: 100% !important;
+}
+
+.review-section {
+  justify-items: center;
+  gap: 22px !important;
+}
+.booking-box {
+  padding: 12px !important;
+}
+
 /* ================================================
    📱 MOBILE FONT SIZE FIX (max-width: 576px)
 ================================================ */
