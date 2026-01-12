@@ -1,8 +1,11 @@
 if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
+  require("dotenv").config();
 }
 
 const express = require("express");
+
+const { MongoStore } = require("connect-mongo");
+
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
@@ -38,7 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
-// 🚫 Prevent caching of dynamic pages (Fix unread badge not updating)
+// 🚫 Prevent caching of dynamic pages
 app.use((req, res, next) => {
   res.set("Cache-Control", "no-store, no-cache, must-revalidate, private");
   res.set("Pragma", "no-cache");
@@ -47,17 +50,48 @@ app.use((req, res, next) => {
 });
 
 // -----------------------
+// DATABASE CONNECTION
+// -----------------------
+
+const dbUrl = process.env.ATLASDB_URL;
+console.log("⭐ DEBUG ATLASDB_URL =", JSON.stringify(process.env.ATLASDB_URL));
+mongoose.connect(dbUrl)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.log("Mongo connection error:", err));
+
+// -----------------------
+// SESSION STORE (FIXED)
+// -----------------------
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+      secret: "mysupersecretcode",
+  },
+  touchAfter: 24 * 3600,
+});
+
+
+
+
+// 🔧 FIX: err parameter added (CRASH FIX)
+store.on("error", (err) => {
+  console.log("ERROR IN MONGO SESSION STORE", err);
+});
+
+// -----------------------
 // SESSION + FLASH
 // -----------------------
 const sessionOptions = {
-    secret: "mysupersecretcode",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        maxAge: 7 * 24 * 60 * 60 * 1000
-    }
+  store,
+  secret: "mysupersecretcode",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000
+  }
 };
+
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -74,96 +108,79 @@ passport.deserializeUser(User.deserializeUser());
 // FLASH + CURRENT USER MIDDLEWARE
 // -----------------------
 app.use((req, res, next) => {
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    res.locals.currUser = req.user;
-    next();
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
+  next();
 });
 
-// -----------------------
-// DATABASE CONNECTION
-// -----------------------
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-mongoose.connect(MONGO_URL)
-    .then(() => console.log("✅ MongoDB Connected"))
-    .catch(err => console.log("Mongo connection error:", err));
-
-
 // -----------------------------------------------------------
-//  PLACE ROOT ROUTE BEFORE USER ROUTER  (IMPORTANT FIX)
+// ROOT ROUTE
 // -----------------------------------------------------------
-
 app.get("/", async (req, res, next) => {
-    try {
+  try {
       const { search, filter } = req.query;
       let query = {};
-  
+
       if (search) {
-        // Search in title, location, or country (case-insensitive)
-        query.$or = [
-          { title: { $regex: search, $options: "i" } },
-          { location: { $regex: search, $options: "i" } },
-          { country: { $regex: search, $options: "i" } }
-        ];
+          query.$or = [
+              { title: { $regex: search, $options: "i" } },
+              { location: { $regex: search, $options: "i" } },
+              { country: { $regex: search, $options: "i" } }
+          ];
       }
-  
+
       if (filter) {
-        query.features = filter;
+          query.features = filter;
       }
-  
+
       const allListings = await Listing.find(query);
       res.render("listings/index", { allListings, filter, search: search || "" });
-    } catch (err) {
+  } catch (err) {
       next(err);
-    }
-  });
-  
+  }
+});
 
 // -----------------------
 // ROUTES
 // -----------------------
-
-// Listing routes
 app.use("/listings", listingRouter);
-
-// Review routes (nested under listings)
 app.use("/listings/:id/reviews", reviewsRouter);
-
-// User routes (login, signup, logout)
 app.use("/", userRouter);
-//booking route
 app.use("/bookings", bookingRouter);
-//Chat route
 app.use("/chat", chatRouter);
 
 // -----------------------
 // MULTER ERROR HANDLER
 // -----------------------
 app.use((err, req, res, next) => {
-    if (err.name === "MulterError") {
-        console.log("Multer error:", err.message);
-        req.flash("error", err.message);
-        return res.redirect("back");
-    }
-    next(err);
+  if (err.name === "MulterError") {
+      console.log("Multer error:", err.message);
+      req.flash("error", err.message);
+      return res.redirect("back");
+  }
+  next(err);
 });
 
 // -----------------------
 // 404 HANDLER
 // -----------------------
 app.use((req, res, next) => {
-    next(new ExpressError(404, "Page not found"));
+  next(new ExpressError(404, "Page not found"));
 });
 
 // -----------------------
 // ERROR HANDLER
 // -----------------------
 app.use((err, req, res, next) => {
-    if (res.headersSent) return next(err);
-    const statusCode = err.statusCode || 500;
-    const message = err.message || "Something went wrong!";
-    res.status(statusCode).render("error", { status: statusCode, message });
+  if (res.headersSent) return next(err);
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Something went wrong!";
+  res.status(statusCode).render("error", { status: statusCode, message });
 });
-// app.use("/", userRouter); 
+
 // -----------------------
-app.listen(8080, () => console.log("Server listening on port 8080"));
+// SERVER (Render-safe FIX)
+// -----------------------
+const PORT = process.env.PORT || 8080; // 🔧 FIXED
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
